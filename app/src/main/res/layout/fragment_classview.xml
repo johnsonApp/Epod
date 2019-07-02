@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ScrollView
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_marginTop="5dp"
+        android:background="@color/colorWhite"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:textColor="@color/colorBlack"
+                android:text="按肌群浏览"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="16dp"
+                android:gravity="center_vertical"
+                />
+
+            <LinearLayout
+                android:id="@+id/class_core"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="@drawable/class_core"
+                android:gravity="bottom"
+                android:onClick="onClick"
+                >
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginBottom="6dp"
+                    android:text="核心"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorWhite"
+                    android:textStyle="bold"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/class_arm"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="@drawable/class_arm"
+                android:gravity="bottom"
+                android:layout_marginTop="10dp"
+                >
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginBottom="6dp"
+                    android:text="雕塑手臂"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorWhite"
+                    android:textStyle="bold"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/class_hip"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="@drawable/class_hip"
+                android:gravity="bottom"
+                android:layout_marginTop="10dp"
+                >
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginBottom="6dp"
+                    android:text="臀部"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorWhite"
+                    android:textStyle="bold"
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:textColor="@color/colorBlack"
+                android:text="按难易程度浏览"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingLeft="16dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                />
+
+            <LinearLayout
+                android:id="@+id/class_junior"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="@drawable/class_junior"
+                android:gravity="bottom"
+                >
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginBottom="6dp"
+                    android:text="初级"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorWhite"
+                    android:textStyle="bold"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>
