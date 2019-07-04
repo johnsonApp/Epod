@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_width="match_parent"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:layout_weight="1"
-        android:layout_marginTop="5dp"
         android:background="@color/colorWhite"
-        >
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -18,13 +26,12 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:textColor="@color/colorBlack"
-                android:text="按肌群浏览"
-                android:textSize="16sp"
-                android:textStyle="bold"
                 android:layout_marginLeft="16dp"
                 android:gravity="center_vertical"
-                />
+                android:text="按肌群浏览"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:id="@+id/class_core"
@@ -32,108 +39,122 @@
                 android:layout_height="120dp"
                 android:background="@drawable/class_core"
                 android:gravity="bottom"
-                android:onClick="onClick"
-                >
+                android:onClick="onClick">
+
                 <TextView
-                    android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:layout_marginLeft="16dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="6dp"
+                    android:layout_marginLeft="16dp"
                     android:text="核心"
-                    android:textSize="16sp"
                     android:textColor="@color/colorWhite"
-                    android:textStyle="bold"
-                    />
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/class_arm"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:background="@drawable/class_arm"
-                android:gravity="bottom"
                 android:layout_marginTop="10dp"
-                >
+                android:background="@drawable/class_arm"
+                android:gravity="bottom">
+
                 <TextView
-                    android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:layout_marginLeft="16dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="6dp"
+                    android:layout_marginLeft="16dp"
                     android:text="雕塑手臂"
-                    android:textSize="16sp"
                     android:textColor="@color/colorWhite"
-                    android:textStyle="bold"
-                    />
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/class_hip"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:background="@drawable/class_hip"
-                android:gravity="bottom"
                 android:layout_marginTop="10dp"
-                >
+                android:background="@drawable/class_hip"
+                android:gravity="bottom">
+
                 <TextView
-                    android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:layout_marginLeft="16dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="6dp"
+                    android:layout_marginLeft="16dp"
                     android:text="臀部"
-                    android:textSize="16sp"
                     android:textColor="@color/colorWhite"
-                    android:textStyle="bold"
-                    />
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:textColor="@color/colorBlack"
-                android:text="按难易程度浏览"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:paddingLeft="16dp"
                 android:layout_marginTop="10dp"
                 android:gravity="center_vertical"
-                />
+                android:paddingLeft="16dp"
+                android:text="按难易程度浏览"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <LinearLayout
-            android:id="@+id/class_junior"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:background="@drawable/class_junior"
-            android:gravity="bottom"
-            >
-            <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginBottom="6dp"
-                android:text="初级"
-                android:textSize="16sp"
-                android:textColor="@color/colorWhite"
-                android:textStyle="bold"
-                />
-        </LinearLayout>
+                android:id="@+id/class_junior"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="@drawable/class_junior"
+                android:gravity="bottom">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+                    android:layout_marginLeft="16dp"
+                    android:text="初级"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/class_medium"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:background="@drawable/class_junior"
-                android:gravity="bottom"
-                >
+
+                android:background="@drawable/class_medium"
+                android:gravity="bottom">
+
                 <TextView
-                    android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:layout_marginLeft="16dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="6dp"
-                    android:text="初级"
-                    android:textSize="16sp"
+                    android:layout_marginLeft="16dp"
+                    android:text="中级"
                     android:textColor="@color/colorWhite"
-                    android:textStyle="bold"
-                    />
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/class_senior"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/class_senior"
+                android:gravity="bottom">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+                    android:layout_marginLeft="16dp"
+                    android:text="中级"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
         </LinearLayout>
