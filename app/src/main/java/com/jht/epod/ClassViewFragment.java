@@ -59,6 +59,12 @@ public class ClassViewFragment extends Fragment {
         /* Inflate the layout for this fragment */
         View view = inflater.inflate(R.layout.fragment_classview, container, false);
 
+        view.findViewById(R.id.class_core).setOnClickListener(mViewListener);
+        view.findViewById(R.id.class_arm).setOnClickListener(mViewListener);
+        view.findViewById(R.id.class_hip).setOnClickListener(mViewListener);
+        view.findViewById(R.id.class_junior).setOnClickListener(mViewListener);
+        view.findViewById(R.id.class_medium).setOnClickListener(mViewListener);
+        view.findViewById(R.id.class_senior).setOnClickListener(mViewListener);
         return view;
     }
 
@@ -106,17 +112,22 @@ public class ClassViewFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    private void onClick(View view){
-        switch (view.getId()){
-            case R.id.class_core:
-            case R.id.class_arm:
-            case R.id.class_hip:
-            case R.id.class_junior:
-                startClassActivity();
-                break;
+    View.OnClickListener mViewListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.class_core:
+                case R.id.class_arm:
+                case R.id.class_hip:
+                case R.id.class_junior:
+                case R.id.class_medium:
+                case R.id.class_senior:
+                    startClassActivity();
+                    break;
 
+            }
         }
-    }
+    };
 
     private void startClassActivity() {
         startActivity(new Intent(getActivity(),MainActivity.class));
