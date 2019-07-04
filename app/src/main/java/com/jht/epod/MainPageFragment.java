@@ -56,6 +56,8 @@ public class MainPageFragment extends Fragment{
 
     private boolean mClassSelected = true;
 
+    private View mView;
+
     public MainPageFragment() {
         // Required empty public constructor
     }
@@ -93,20 +95,16 @@ public class MainPageFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         /* Inflate the layout for this fragment */
-        View view = inflater.inflate(R.layout.fragment_mainpage, container, false);
-        mClass = view.findViewById(R.id.uptab_class);
-        mClassText = view.findViewById(R.id.uptab_class_text);
-        mClassImage = view.findViewById(R.id.uptab_class_image);
+        if(mView == null){
+            mView = inflater.inflate(R.layout.fragment_mainpage, container, false);
+            init();
+        }
+        ViewGroup parent = (ViewGroup) mView.getParent();
+        if (parent != null) {
+            parent.removeView(mView);
+        }
 
-        mPlan = view.findViewById(R.id.uptab_plan);
-        mPlanText = view.findViewById(R.id.uptab_plan_text);
-        mPlanImage = view.findViewById(R.id.uptab_plan_image);
-
-        updateState(mClassSelected);
-        mClass.setOnClickListener(mViewListener);
-        mPlan.setOnClickListener(mViewListener);
-
-        return view;
+        return mView;
     }
 
     View.OnClickListener mViewListener = new View.OnClickListener() {
@@ -187,6 +185,23 @@ public class MainPageFragment extends Fragment{
 
     private void startClassActivity() {
         startActivity(new Intent(getActivity(),MainActivity.class));
+    }
+
+    private void init() {
+        if(mView != null){
+            View view = mView;
+            mClass = view.findViewById(R.id.uptab_class);
+            mClassText = view.findViewById(R.id.uptab_class_text);
+            mClassImage = view.findViewById(R.id.uptab_class_image);
+
+            mPlan = view.findViewById(R.id.uptab_plan);
+            mPlanText = view.findViewById(R.id.uptab_plan_text);
+            mPlanImage = view.findViewById(R.id.uptab_plan_image);
+
+            updateState(mClassSelected);
+            mClass.setOnClickListener(mViewListener);
+            mPlan.setOnClickListener(mViewListener);
+        }
     }
 
     private void updateState(boolean state){
