@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +27,7 @@ import com.jht.epod.utils.CheckableLinearLayout;
  * Use the {@link MainPageFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MainPageFragment extends Fragment {
+public class MainPageFragment extends Fragment{
     private static final String TAG = "MainPageFragment";
 
     // TODO: Rename parameter arguments, choose names that match
@@ -47,6 +49,10 @@ public class MainPageFragment extends Fragment {
     private LinearLayout mPlan;
     private TextView mPlanText;
     private ImageView mPlanImage;
+
+    private Fragment mCurrentFragment = null;
+    private ClassViewFragment mClassView;
+    private MyPlanFragment mMyPlan;
 
     private boolean mClassSelected = true;
 
@@ -79,6 +85,8 @@ public class MainPageFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        mClassView = new ClassViewFragment();
+        mMyPlan = new MyPlanFragment();
     }
 
     @Override
@@ -94,14 +102,9 @@ public class MainPageFragment extends Fragment {
         mPlanText = view.findViewById(R.id.uptab_plan_text);
         mPlanImage = view.findViewById(R.id.uptab_plan_image);
 
-        updateTab();
+        updateState(mClassSelected);
         mClass.setOnClickListener(mViewListener);
         mPlan.setOnClickListener(mViewListener);
-
-        view.findViewById(R.id.class_core).setOnClickListener(mViewListener);
-        view.findViewById(R.id.class_arm).setOnClickListener(mViewListener);
-        view.findViewById(R.id.class_hip).setOnClickListener(mViewListener);
-        view.findViewById(R.id.class_junior).setOnClickListener(mViewListener);
 
         return view;
     }
@@ -124,12 +127,12 @@ public class MainPageFragment extends Fragment {
                     updateState(false);
                     break;
 
-                case R.id.class_core:
+                /*case R.id.class_core:
                 case R.id.class_arm:
                 case R.id.class_hip:
                 case R.id.class_junior:
                     startClassActivity();
-                    break;
+                    break;*/
             }
         }
     };
@@ -178,12 +181,21 @@ public class MainPageFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
+    public void onFragmentInteraction(Uri uri){
+
+    }
+
     private void startClassActivity() {
         startActivity(new Intent(getActivity(),MainActivity.class));
     }
 
     private void updateState(boolean state){
         mClassSelected = state;
+        if(mClassSelected) {
+            switchFragment(mClassView);
+        }else {
+            switchFragment(mMyPlan);
+        }
         updateTab();
     }
 
@@ -199,5 +211,22 @@ public class MainPageFragment extends Fragment {
             mPlanText.setTextColor(getResources().getColor(R.color.colorUpTabSelect));
             mPlanImage.setBackgroundColor(getResources().getColor(R.color.colorUpTabSelect));
         }
+    }
+
+    private void switchFragment(Fragment targetFragment) {
+        FragmentManager manager = getActivity().getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        if(!targetFragment.isAdded()) {
+            if (mCurrentFragment != null) {
+                transaction.hide(mCurrentFragment);
+            }
+            transaction.add(R.id.fragment_container,targetFragment,targetFragment.getClass().getName());
+        }else {
+            transaction
+                    .hide(mCurrentFragment)
+                    .show(targetFragment);
+        }
+        mCurrentFragment = targetFragment;
+        transaction.commit();
     }
 }

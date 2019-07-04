@@ -25,7 +25,8 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 public class HomePageActivity extends AppCompatActivity implements MainPageFragment.OnFragmentInteractionListener,
-        DynamicFragment.OnFragmentInteractionListener,UserCenterFragment.OnFragmentInteractionListener{
+        DynamicFragment.OnFragmentInteractionListener,UserCenterFragment.OnFragmentInteractionListener,
+        MyPlanFragment.OnFragmentInteractionListener,ClassViewFragment.OnFragmentInteractionListener{
 
     private final static String Tag = "HomePageActivity";
 
