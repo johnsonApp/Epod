@@ -72,4 +72,9 @@
     <string name="recommended_course">Recommended course</string>
     <string name="list_class_title">Shoulder and arm exercises</string>
     <string name="list_class_subtitle">10 minutes * 89 kilocalorie * primary</string>
+    <string name="all_browse">All browse</string>
+    <string name="browse_way">Browse Way</string>
+    <string name="core">core</string>
+    <string name="arm">arm</string>
+    <string name="hip">hip</string>
 </resources>

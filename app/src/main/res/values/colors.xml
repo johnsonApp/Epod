@@ -21,4 +21,5 @@
     <color name="colorSecondBg">#f5f5f5</color>
     <color name="colorUpTabSelect">#e22319</color>
     <color name="colorTabUnselect">#9a9a9a</color>
+    <color name="colorClassCount">#c7c7c7</color>
 </resources>

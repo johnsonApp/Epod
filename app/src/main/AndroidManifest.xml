@@ -14,19 +14,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.jht.epod.HomePageActivity">
+        <activity android:name=".HomePageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".CountdownActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".TrainingActivity"
+            android:screenOrientation="landscape" />
 
-        <activity android:name="com.jht.epod.MainActivity"/>
-        <activity android:name=".CountdownActivity" android:screenOrientation="landscape"/>
-        <activity android:name=".TrainingActivity" android:screenOrientation="landscape"/>
+        <service android:name=".ble.BleService" />
 
-        <service android:name="com.jht.epod.ble.BleService"/>
+        <activity android:name=".ClassListActivity" />
+        <activity android:name=".ClassClassifyActivity"></activity>
     </application>
 
 </manifest>

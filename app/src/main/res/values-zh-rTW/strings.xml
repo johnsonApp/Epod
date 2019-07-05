@@ -61,4 +61,9 @@
     <string name="recommended_course">推薦課程</string>
     <string name="list_class_title">肩部和手臂鍛煉</string>
     <string name="list_class_subtitle">10 分鐘 * 89 千卡 * 初階</string>
+    <string name="all_browse">全部瀏覽</string>
+    <string name="browse_way">瀏覽方式</string>
+    <string name="core">收腹</string>
+    <string name="arm">雕塑手臂</string>
+    <string name="hip">翹臀</string>
 </resources>
