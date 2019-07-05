@@ -55,4 +55,10 @@
     <string name="tab_class">課程</string>
     <string name="tab_dynamic">動態</string>
     <string name="tab_user">我的</string>
+
+    <string name="add_plan_title">我的訓練計劃</string>
+    <string name="add_plan_button">+ 添加課程</string>
+    <string name="recommended_course">推薦課程</string>
+    <string name="list_class_title">肩部和手臂鍛煉</string>
+    <string name="list_class_subtitle">10 分鐘 * 89 千卡 * 初階</string>
 </resources>

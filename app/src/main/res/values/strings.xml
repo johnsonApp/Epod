@@ -66,4 +66,10 @@
     <string name="tab_class">class</string>
     <string name="tab_dynamic">dynamic</string>
     <string name="tab_user">user</string>
+
+    <string name="add_plan_title">My training program</string>
+    <string name="add_plan_button">+ Add the course</string>
+    <string name="recommended_course">Recommended course</string>
+    <string name="list_class_title">Shoulder and arm exercises</string>
+    <string name="list_class_subtitle">10 minutes * 89 kilocalorie * primary</string>
 </resources>

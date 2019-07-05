@@ -7,6 +7,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SimpleAdapter;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MyPlanFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -56,6 +60,22 @@ public class MyPlanFragment extends Fragment {
                              Bundle savedInstanceState) {
         /* Inflate the layout for this fragment */
         View view = inflater.inflate(R.layout.fragment_myplan, container, false);
+
+        MeasureListView mListClass = view.findViewById(R.id.list_class);
+        ArrayList<HashMap<String, Object>> listClassValue = new ArrayList<HashMap<String, Object>>();
+        for(int i = 0; i < 4; i++){
+            HashMap<String, Object> classValue = new HashMap<String, Object>();
+            classValue.put("classPic", R.drawable.list_class_pic);
+            classValue.put("classTitle", getResources().getString(R.string.list_class_title));
+            classValue.put("classSubtitle", getResources().getString(R.string.list_class_subtitle));
+            listClassValue.add(classValue);
+        }
+        SimpleAdapter adapter = new SimpleAdapter(getActivity(), listClassValue,
+                R.layout.list_recommended_course,
+                new String[]{"classPic", "classTitle", "classSubtitle"},
+                new int[]{R.id.class_pic, R.id.class_title, R.id.class_subtitle});
+        mListClass.setAdapter(adapter);
+
         return view;
     }
 
