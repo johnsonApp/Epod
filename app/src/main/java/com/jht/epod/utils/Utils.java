@@ -67,19 +67,7 @@ import java.util.UUID;
 
 public class Utils {
 
-    public static final String TAG                                                              = "THINGY:52";
-    public static final String PREFS_INITIAL_SETUP                                              = "INITIAL_SETUP";
-    public static final String INITIAL_CONFIG_STATE                                             = "INITIAL_CONFIG_STATE";
-    public static final String SIGN_IN_OPTED                                                    = "SIGN_IN_OPTED";
-
-    public static final UUID HOMEGYM_BASE_UUID                                                  = UUID.fromString("43e70001-c92b-4ac4-834f-38981f04dcfa");
-    public static final UUID HOMEGYM_WRITE_UUID                                                 = UUID.fromString("43e70002-c92b-4ac4-834f-38981f04dcfa");
-    public static final UUID HOMEGYM_READ_UUID                                                  = UUID.fromString("43e70003-c92b-4ac4-834f-38981f04dcfa");
-
-    public static final UUID ACCESSORY_BASE_UUID                                                = UUID.fromString("54f80001-c92b-4ac4-834f-38981f04dcfa");
-    public static final UUID ACCESSORY_WRITE_UUID                                               = UUID.fromString("54f80002-c92b-4ac4-834f-38981f04dcfa");
-    public static final UUID ACCESSORY_READ_UUID                                                = UUID.fromString("54f80003-c92b-4ac4-834f-38981f04dcfa");
-    public static final UUID ACCESSORY_SENSOR_UUID                                              = UUID.fromString("54f80004-c92b-4ac4-834f-38981f04dcfa");
+    public static final String TAG                                                              = "Epod";
 
     public static final UUID EPOD_BASE_UUID                                                     = UUID.fromString("0000fff0-0000-1000-8000-00805f9b34fb");// service
     // UUID
@@ -87,220 +75,16 @@ public class Utils {
 
     public static final UUID EPOD_WRITE_UUID                                                    = UUID.fromString("0000FFF3-0000-1000-8000-00805f9b34fb");// write
 
-    public static final UUID THINGY_BASE_UUID                                                   = new UUID(0xEF6801009B354933L, 0x9B1052FFA9740042L);
-    public static final UUID THINGY_CONFIGURATION_SERVICE                                       = new UUID(0xEF6801009B354933L, 0x9B1052FFA9740042L);
-    public static final UUID DEVICE_NAME_CHARACTERISTIC_UUID                                    = new UUID(0xEF6801019B354933L, 0x9B1052FFA9740042L);
-    public static final UUID ADVERTISING_PARAM_CHARACTERISTIC_UUID                              = new UUID(0xEF6801029B354933L, 0x9B1052FFA9740042L);
-    public static final UUID APPEARANCE_CHARACTERISTIC_UUID                                     = new UUID(0xEF6801039B354933L, 0x9B1052FFA9740042L);
-    public static final UUID CONNECTION_PARAM_CHARACTERISTIC_UUID                               = new UUID(0xEF6801049B354933L, 0x9B1052FFA9740042L);
-    public static final UUID EDDYSTONE_URL_CHARACTERISTIC_UUID                                  = new UUID(0xEF6801059B354933L, 0x9B1052FFA9740042L);
-    public static final UUID CLOUD_TOKEN_CHARACTERISTIC_UUID                                    = new UUID(0xEF6801069B354933L, 0x9B1052FFA9740042L);
-    public static final UUID FIRMWARE_VERSION_CHARACERISTIC_UUID                                = new UUID(0xEF6801079B354933L, 0x9B1052FFA9740042L);
-
-    public static final UUID BATTERY_SERVICE                                                    = UUID.fromString("0000180F-0000-1000-8000-00805f9b34fb");
-    public static final UUID BATTERY_SERVICE_CHARACTERISTIC                                     = UUID.fromString("00002A19-0000-1000-8000-00805f9b34fb");
-
-    public static final UUID THINGY_ENVIRONMENTAL_SERVICE                                       = new UUID(0xEF6802009B354933L, 0x9B1052FFA9740042L);
-    public static final UUID TEMPERATURE_CHARACTERISTIC                                         = new UUID(0xEF6802019B354933L, 0x9B1052FFA9740042L);
-    public static final UUID PRESSURE_CHARACTERISTIC                                            = new UUID(0xEF6802029B354933L, 0x9B1052FFA9740042L);
-    public static final UUID HUMIDITY_CHARACTERISTIC                                            = new UUID(0xEF6802039B354933L, 0x9B1052FFA9740042L);
-    public static final UUID AIR_QUALITY_CHARACTERISTIC                                         = new UUID(0xEF6802049B354933L, 0x9B1052FFA9740042L);
-    public static final UUID COLOR_CHARACTERISTIC                                               = new UUID(0xEF6802059B354933L, 0x9B1052FFA9740042L);
-    public static final UUID CONFIGURATION_CHARACTERISTIC                                       = new UUID(0xEF6802069B354933L, 0x9B1052FFA9740042L);
-
-    public static final UUID THINGY_UI_SERVICE                                                  = new UUID(0xEF6803009B354933L, 0x9B1052FFA9740042L);
-    public static final UUID LED_CHARACTERISTIC                                                 = new UUID(0xEF6803019B354933L, 0x9B1052FFA9740042L);
-    public static final UUID BUTTON_CHARACTERISTIC                                              = new UUID(0xEF6803029B354933L, 0x9B1052FFA9740042L);
-
-    public static final UUID THINGY_MOTION_SERVICE                                              = new UUID(0xEF6804009B354933L, 0x9B1052FFA9740042L);
-    public static final UUID THINGY_MOTION_CONFIGURATION_CHARACTERISTIC                         = new UUID(0xEF6804019B354933L, 0x9B1052FFA9740042L);
-    public static final UUID TAP_CHARACTERISTIC                                                 = new UUID(0xEF6804029B354933L, 0x9B1052FFA9740042L);
-    public static final UUID ORIENTATION_CHARACTERISTIC                                         = new UUID(0xEF6804039B354933L, 0x9B1052FFA9740042L);
-    public static final UUID QUATERNION_CHARACTERISTIC                                          = new UUID(0xEF6804049B354933L, 0x9B1052FFA9740042L);
-    public static final UUID PEDOMETER_CHARACTERISTIC                                           = new UUID(0xEF6804059B354933L, 0x9B1052FFA9740042L);
-    public static final UUID RAW_DATA_CHARACTERISTIC                                            = new UUID(0xEF6804069B354933L, 0x9B1052FFA9740042L);
-    public static final UUID EULER_CHARACTERISTIC                                               = new UUID(0xEF6804079B354933L, 0x9B1052FFA9740042L);
-    public static final UUID ROTATION_MATRIX_CHARACTERISTIC                                     = new UUID(0xEF6804089B354933L, 0x9B1052FFA9740042L);
-    public static final UUID HEADING_CHARACTERISTIC                                             = new UUID(0xEF6804099B354933L, 0x9B1052FFA9740042L);
-    public static final UUID GRAVITY_VECTOR_CHARACTERISTIC                                      = new UUID(0xEF68040A9B354933L, 0x9B1052FFA9740042L);
-
-    public static final UUID THINGY_SOUND_SERVICE                                               = new UUID(0xEF6805009B354933L, 0x9B1052FFA9740042L);
-    public static final UUID THINGY_SOUND_CONFIG_CHARACTERISTIC                                 = new UUID(0xEF6805019B354933L, 0x9B1052FFA9740042L);
-    public static final UUID THINGY_SPEAKER_DATA_CHARACTERISTIC                                 = new UUID(0xEF6805029B354933L, 0x9B1052FFA9740042L);
-    public static final UUID THINGY_SPEAKER_STATUS_CHARACTERISTIC                               = new UUID(0xEF6805039B354933L, 0x9B1052FFA9740042L);
-    public static final UUID THINGY_MICROPHONE_CHARACTERISTIC                                   = new UUID(0xEF6805049B354933L, 0x9B1052FFA9740042L);
-
-    public static final UUID CLIENT_CHARACTERISTIC_CONFIGURATOIN_DESCRIPTOR                     = new UUID(0x0000290200001000L, 0x800000805f9B34FBL);
-
-    public final static ParcelUuid PARCEL_SECURE_DFU_SERVICE                                    = ParcelUuid.fromString("0000FE59-0000-1000-8000-00805F9B34FB");
-    public final static UUID SECURE_DFU_SERVICE                                                 = UUID.fromString("0000FE59-0000-1000-8000-00805F9B34FB");
-    public static final UUID THINGY_BUTTONLESS_DFU_SERVICE                                      = new UUID(0x8E400001F3154F60l, 0x9FB8838830DAEA50L);
-    public static final UUID DFU_DEFAULT_CONTROL_POINT_CHARACTERISTIC                           = new UUID(0x8EC90001F3154F60l, 0x9FB8838830DAEA50L);
-    public static final UUID DFU_CONTROL_POINT_CHARACTERISTIC_WITHOUT_BOND_SHARING              = new UUID(0x8EC90003F3154F60l, 0x9FB8838830DAEA50L);
-
     public static final String ACTION_DEVICE_CONNECTED                                          = "ACTION_DEVICE_CONNECTED_";
     public static final String ACTION_DEVICE_DISCONNECTED                                       = "ACTION_DEVICE_DISCONNECTED_";
     public static final String ACTION_SERVICE_DISCOVERY_COMPLETED                               = "ACTION_SERVICE_DISCOVERY_COMPLETED_";
     public static final String ACTION_DATA_RECEIVED                                             = "ACTION_DATA_RECEIVED_";
     public static final String CONNECTION_STATE                                                 = "READING_CONFIGURATION";
 
-    private static final String ACTION_ENVIRONMENT_CONFIGRATION_READ_COMPLETE                   = "ACTION_ENVIRONMENT_CONFIGRATION_READ_COMPLETE_";
-    public static final String EXTRA_DATA_TEMPERATURE_INTERVAL                                  = "EXTRA_DATA_TEMPERATURE_INTERVAL";
-    public static final String EXTRA_DATA_PRESSURE_INTERVAL                                     = "EXTRA_DATA_PRESSURE_INTERVAL";
-    public static final String EXTRA_DATA_HUMIDITY_INTERVAL                                     = "EXTRA_DATA_HUMIDITY_INTERVAL";
-    public static final String EXTRA_DATA_GAS_MODE                                              = "EXTRA_DATA_GAS_MODE";
-    public static final String EXTRA_DATA_PRESSURE_MODE                                         = "EXTRA_DATA_PRESSURE_MODE";
-
-    public static final String ACTION_MOTION_CONFIGRATION_READ                                  = "ACTION_MOTION_CONFIGRATION_READ";
-
-    public static final String EXTRA_DEVICE                                                     = "EXTRA_DEVICE";
-    public static final String EXTRA_DEVICE_NAME                                                = "EXTRA_DEVICE_NAME";
-    public static final String EXTRA_DEVICE_ADDRESS                                             = "EXTRA_DEVICE_ADDRESS";
-
-    public static final String BATTERY_LEVEL_NOTIFICATION                                       = "BATTERY_LEVEL_NOTIFICATION_";
-
-    public static final String TEMPERATURE_NOTIFICATION                                         = "TEMPERATURE_NOTIFICATION_";
-    public static final String PRESSURE_NOTIFICATION                                            = "PRESSURE_NOTIFICATION_";
-    public static final String HUMIDITY_NOTIFICATION                                            = "HUMIDITY_NOTIFICATION_";
-    public static final String AIR_QUALITY_NOTIFICATION                                         = "AIR_QUALITY_NOTIFICATION_";
-    public static final String COLOR_NOTIFICATION                                               = "COLOR_NOTIFICATION_";
-    public static final String CONFIGURATION_DATA                                               = "CONFIGURATION_DATA_";
-
-
-    public static final String BUTTON_STATE_NOTIFICATION                                        = "BUTTON_STATE_NOTIFICATION_";
-
-    public static final String TAP_NOTIFICATION                                                 = "TAP_NOTIFICATION_";
-    public static final String ORIENTATION_NOTIFICATION                                         = "ORIENTATION_NOTIFICATION_";
-    public static final String QUATERNION_NOTIFICATION                                          = "QUATERNION_NOTIFICATION_";
-    public static final String PEDOMETER_NOTIFICATION                                           = "PEDOMETER_NOTIFICATION_";
-    public static final String RAW_DATA_NOTIFICATION                                            = "RAW_DATA_NOTIFICATION_";
-    public static final String EULER_NOTIFICATION                                               = "EULER_NOTIFICATION_";
-    public static final String ROTATION_MATRIX_NOTIFICATION                                     = "ROTATION_MATRIX_NOTIFICATION_";
-    public static final String HEADING_NOTIFICATION                                             = "HEADING_NOTIFICATION_";
-    public static final String GRAVITY_NOTIFICATION                                             = "GRAVITY_NOTIFICATION_";
-
-    public static final String SPEAKER_STATUS_NOTITIFCATION                                     = "SPEAKER_STATUS_NOTITIFCATION_";
-    public static final String MICROPHONE_NOTITIFCATION                                         = "MICROPHONE_NOTITIFCATION_";
-
-    public static final String EXTRA_DATA                                                       = "EXTRA_DATA";
-    public static final String EXTRA_DATA_TIME_STAMP                                            = "EXTRA_DATA_TIME_STAMP";
-    public static final String EXTRA_DATA_ECO2                                                  = "EXTRA_DATA_ECO2";
-    public static final String EXTRA_DATA_TVOC                                                  = "EXTRA_DATA_TVOC";
-
-    public static final String EXTRA_DATA_RED                                                   = "EXTRA_DATA_RED";
-    public static final String EXTRA_DATA_BLUE                                                  = "EXTRA_DATA_BLUE";
-    public static final String EXTRA_DATA_GREEN                                                 = "EXTRA_DATA_GREEN";
-    public static final String EXTRA_DATA_CLEAR                                                 = "EXTRA_DATA_CLEAR";
-    public static final String EXTRA_DATA_BUTTON                                                = "EXTRA_DATA_BUTTON";
-
-    public static final String EXTRA_DATA_TAP_COUNT                                             = "EXTRA_DATA_TAP_COUNT";
-    public static final String EXTRA_DATA_TAP_DIRECTION                                         = "EXTRA_DATA_TAP_DIRECTION";
-
-    public static final String EXTRA_DATA_QUATERNION_W                                          = "EXTRA_DATA_QUATERNION_W";
-    public static final String EXTRA_DATA_QUATERNION_X                                          = "EXTRA_DATA_QUATERNION_X";
-    public static final String EXTRA_DATA_QUATERNION_Y                                          = "EXTRA_DATA_QUATERNION_Y";
-    public static final String EXTRA_DATA_QUATERNION_Z                                          = "EXTRA_QUATERNION_Z";
-
-    public static final String EXTRA_DATA_STEP_COUNT                                            = "EXTRA_DATA_STEP_COUNT";
-    public static final String EXTRA_DATA_DURATION                                              = "EXTRA_DATA_DURATION";
-
-    public static final String EXTRA_DATA_ACCELEROMETER_X                                       = "EXTRA_DATA_ACCELEROMETER_X";
-    public static final String EXTRA_DATA_ACCELEROMETER_Y                                       = "EXTRA_DATA_ACCELEROMETER_Y";
-    public static final String EXTRA_DATA_ACCELEROMETER_Z                                       = "EXTRA_DATA_ACCELEROMETER_Z";
-
-    public static final String EXTRA_DATA_GYROSCOPE_X                                           = "EXTRA_DATA_DATA_GYROSCOPE_X";
-    public static final String EXTRA_DATA_GYROSCOPE_Y                                           = "EXTRA_DATA_GYROSCOPE_Y";
-    public static final String EXTRA_DATA_GYROSCOPE_Z                                           = "EXTRA_DATA_GYROSCOPE_Z";
-
-    public static final String EXTRA_DATA_PITCH                                                 = "EXTRA_DATA_PITCH";
-    public static final String EXTRA_DATA_ROLL                                                  = "EXTRA_DATA_ROLL";
-    public static final String EXTRA_DATA_YAW                                                   = "EXTRA_DATA_YAW";
-
-    public static final String EXTRA_DATA_GRAVITY_X                                             = "EXTRA_DATA_GRAVITY_X";
-    public static final String EXTRA_DATA_GRAVITY_Y                                             = "EXTRA_DATA_GRAVITY_Y";
-    public static final String EXTRA_DATA_GRAVITY_Z                                             = "EXTRA_DATA_GRAVITY_Z";
-
-    public static final String EXTRA_DATA_COMPASS_X                                             = "EXTRA_DATA_COMPASS_X";
-    public static final String EXTRA_DATA_COMPASS_Y                                             = "EXTRA_DATA_COMPASS_Y";
-    public static final String EXTRA_DATA_COMPASS_Z                                             = "EXTRA_DATA_COMPASS_Z";
-
-    public static final String EXTRA_DATA_ROTATION_MATRIX                                       = "EXTRA_DATA_COMPASS_Z";
 
     public static final String EXTRA_DATA_SPEAKER_STATUS_NOTITIFCATION                          = "EXTRA_DATA_SPEAKER_STATUS_NOTITIFCATION";
     public static final String EXTRA_DATA_SPEAKER_MODE                                          = "EXTRA_DATA_SPEAKER_MODE";
 
-    public static final String EXTRA_DATA_MICROPHONE_NOTITIFCATION                              = "EXTRA_DATA_MICROPHONE_NOTITIFCATION";
-    public static final String EXTRA_DATA_PCM                                                   = "EXTRA_DATA_PCM";
-
-    public static final String INITIAL_CONFIG_FROM_ACTIVITY                                     = "INITIAL_CONFIG_FROM_ACTIVITY";
-
-    public static final int SAMPLE_1                                                            = 0;
-    public static final int SAMPLE_2                                                            = 1;
-    public static final int SAMPLE_3                                                            = 2;
-    public static final int SAMPLE_4                                                            = 3;
-    public static final int SAMPLE_5                                                            = 4;
-    public static final int SAMPLE_6                                                            = 5;
-    public static final int SAMPLE_7                                                            = 6;
-    public static final int SAMPLE_8                                                            = 7;
-    public static final int SAMPLE_9                                                            = 8;
-
-    public static final int BUTTON_STATE_RELEASED                                               = 0x00;
-    public static final int BUTTON_STATE_PRESSED                                                = 0x01;
-
-    public static final byte OFF                                                                = 0x00;
-    public static final byte CONSTANT                                                           = 0x01;
-    public static final byte BREATHE                                                            = 0x02;
-    public static final byte ONE_SHOT                                                           = 0x03;
-
-    public static final int LED_RED                                                             = 0x01;
-    public static final int LED_GREEN                                                           = 0x02;
-    public static final int LED_YELLOW                                                          = 0x03;
-    public static final int LED_BLUE                                                            = 0x04;
-    public static final int LED_PURPLE                                                          = 0x05;
-    public static final int LED_CYAN                                                            = 0x06;
-    public static final int LED_WHITE                                                           = 0x07;
-
-    public static final int DEFAULT_RED_INTENSITY                                               = 0;
-    public static final int DEFAULT_GREEN_INTENSITY                                             = 255;
-    public static final int DEFAULT_BLUE_INTENSITY                                              = 255;
-
-    public static final int DEFAULT_RED_CALIBRATION_INTENSITY                                   = 103;
-    public static final int DEFAULT_GREEN_CALIBRATION_INTENSITY                                 = 78;
-    public static final int DEFAULT_BLUE_CALIBRATION_INTENSITY                                  = 29;
-
-    public static final int DEFAULT_BREATHE_INTERVAL                                            = 3500;
-    public static final int DEFAULT_MINIMUM_BREATHE_INTERVAL                                    = 50; //ms
-    public static final int DEFAULT_MAXIMUM_BREATHE_INTERVAL                                    = 10000; //ms
-
-    public static final int DEFAULT_LED_INTENSITY                                               = 20;
-    public static final int DEFAULT_MINIMUM_LED_INTENSITY                                       = 1;
-    public static final int DEFAULT_MAXIIMUM_LED_INTENSITY                                      = 100;
-
-    public static final int DEFAULT_LED_COLOR                                                   = Color.CYAN;
-
-    public static final int TAP_X_UP                                                            = 0x01;
-    public static final int TAP_X_DOWN                                                          = 0x02;
-    public static final int TAP_Y_UP                                                            = 0x03;
-    public static final int TAP_Y_DOWN                                                          = 0x04;
-    public static final int TAP_Z_UP                                                            = 0x05;
-    public static final int TAP_Z_DOWN                                                          = 0x06;
-
-    public static final String X_UP                                                             = "FRONT";
-    public static final String X_DOWN                                                           = "BACK";
-    public static final String Y_UP                                                             = "RIGHT";
-    public static final String Y_DOWN                                                           = "LEFT";
-    public static final String Z_UP                                                             = "TOP";
-    public static final String Z_DOWN                                                           = "BOTTOM";
-
-    public static final int PORTRAIT_TYPE                                                       = 0x00;
-    public static final int LANDSCAPE_TYPE                                                      = 0x01;
-    public static final int REVERSE_PORTRAIT_TYPE                                               = 0x02;
-    public static final int REVERSE_LANDSCAPE_TYPE                                              = 0x03;
-
-    public static final String PORTRAIT                                                         = "PORTRAIT";
-    public static final String LANDSCAPE                                                        = "LANDSCAPE";
-    public static final String REVERSE_PORTRAIT                                                 = "R PORTRAIT";
-    public static final String REVERSE_LANDSCAPE                                                = "R LANDSCAPE";
 
     public static final int FORMAT_UINT24                                                       = 0x13;
     public static final int FORMAT_SINT24                                                       = 0x23;
@@ -314,66 +98,31 @@ public class Utils {
     public static final DecimalFormat GRAVITY_VECTOR_DECIMAL_FORMAT                             = new DecimalFormat("#.##");
     public static final int CLOUD_TOKEN_LENGTH                                                  = 250;
 
-    public static double ADVERTISING_INTERVAL_UNIT                                              = 0.625; //ms
-    public static double CONN_INT_UNIT                                                          = 1.25;
-    public static int MIN_CONN_VALUE                                                            = 6;
-    public static double MIN_CONN_INTERVAL                                                      = 7.5; //ms
-    public static int MAX_CONN_VALUE                                                            = 3200;
-    public static int MAX_CONN_INTERVAL                                                         = 4000; //ms
-    public static int MIN_SLAVE_LATENCY                                                         = 0;
-    public static int MAX_SLAVE_LATENCY                                                         = 500;
-    public static int MIN_SUPERVISION_TIMEOUT                                                   = 100; //ms
-    public static int MAX_SUPERVISION_TIMEOUT                                                   = 32000; //ms
-
-    //Android BLE
-    public static double MAX_CONN_INTERVAL_POST_LOLIPOP                                         = 11.25; //ms
-
-    public static final int MAX_MTU_SIZE_THINGY                                                 = 276;
-    public static final int MAX_MTU_SIZE_PRE_LOLLIPOP                                           = 23;
-    public static final int MAX_AUDIO_PACKET_SIZE                                               = 160; //
-
-    //Notification Intervals in ms
-    public static final int ENVIRONMENT_NOTIFICATION_MAX_INTERVAL                               = 60000;
-    public static final int NOTIFICATION_MAX_INTERVAL                                           = 5000;
-    public static final int TEMP_MIN_INTERVAL                                                   = 100;
-    public static final int PRESSURE_MIN_INTERVAL                                               = 50;
-    public static final int HUMIDITY_MIN_INTERVAL                                               = 100;
-    public static final int COLOR_INTENSITY_MIN_INTERVAL                                        = 200;
-    public static final int PEDOMETER_MIN_INTERVAL                                              = 100;
-    public static final int COMPASS_MIN_INTERVAL                                                = 100;
-    public static final int MPU_FREQ_MIN_INTERVAL                                               = 5; //hz
-    public static final int MPU_FREQ_MAX_INTERVAL                                               = 200; //hz
-
-    public static final int GAS_MODE_1                                                          = 1;
-    public static final int GAS_MODE_2                                                          = 2;
-    public static final int GAS_MODE_3                                                          = 3;
-
-    public static final int WAKE_ON_MOTION_ON                                                   = 0x00;
-    public static final int WAKE_ON_MOTION_OFF                                                  = 0x01;
-
-    //Speaker modes
-    public static final int FREQUENCY_MODE                                                      = 0x01;
-    public static final int PCM_MODE                                                            = 0x02;
-    public static final int SAMPLE_MODE                                                         = 0x03;
-
-    //Microphone mode
-    public static final int ADPCM_MODE                                                          = 0x01;
-    public static final int SPL_MODE                                                            = 0x02;
-
-
-    //Speaker status notifications
-    public static final int SPEAKER_STATUS_FINISHED                                             = 0x00;
-    public static final int SPEAKER_STATUS_BUFFER_WARNING                                       = 0x01;
-    public static final int SPEAKER_STATUS_BUFFER_READY                                         = 0x02;
-    public static final int SPEAKER_STATUS_PACKET_DISREGARDED                                   = 0x10;
-    public static final int SPEAKER_STATUS_INVALID_COMMAND                                      = 0x11;
 
 
     public static final int REQUEST_CODE_ACCESS_COARSE_LOCATION = 1;
 
-    public final static int DUMBBELL = 0;
-    public final static int ROPE_SKIP = 1;
-    public final static int HOMEGYM = 2;
+    public static final String TABLE_NAME = "class";
+
+    public static final String ID = "ID";
+    public static final String NAME = "NAME";
+    public static final String TIME = "TIME";
+    public static final String CALORIE = "CALORIE";
+    public static final String DEGREE = "DEGREE";
+    public static final String CLASSTYPE = "CLASSTYPE";
+    public static final String ICONNAME = "ICONNAME";
+    public static final String SELECTED = "SELECTED";
+
+    public static final int DEGREE_JUNIOR = 1;
+    public static final int DEGREE_MEDIUM = 2;
+    public static final int DEGREE_SENIOR = 3;
+
+    public static final int TYPE_CORE = 1;
+    public static final int TYPE_ARM = 2;
+    public static final int TYPE_HIP = 3;
+
+    public static final int SELECTE = 1;
+    public static final int UNSELECTE = 0;
 
 
     /**

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/training_background"
-    tools:context=".TrainingActivity">
+    tools:context=".activity.TrainingActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

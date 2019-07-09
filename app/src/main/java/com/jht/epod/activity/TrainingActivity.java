@@ -1,11 +1,9 @@
-package com.jht.epod;
+package com.jht.epod.activity;
 
 import android.app.Activity;
-import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattDescriptor;
-import android.bluetooth.BluetoothGattService;
 import android.bluetooth.BluetoothProfile;
 import android.content.ComponentName;
 import android.content.Context;
@@ -21,19 +19,14 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jht.epod.R;
 import com.jht.epod.ble.BleService;
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -79,7 +72,6 @@ public class TrainingActivity extends Activity {
     private StringBuilder mLogData;
 
     private Handler mHandler = new Handler() {
-        boolean result = false;
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
@@ -125,9 +117,9 @@ public class TrainingActivity extends Activity {
         super.onCreate(savedInstanceState);
         Log.d(TAG,"onCreate");
         setContentView(R.layout.activity_training);
-        mCountDown = (TextView) findViewById(R.id.strength_num);
-        mTrainingTime = (TextView) findViewById(R.id.trainingg_time);
-        mBackButton = (ImageView) findViewById(R.id.back);
+        mCountDown = findViewById(R.id.strength_num);
+        mTrainingTime = findViewById(R.id.trainingg_time);
+        mBackButton = findViewById(R.id.back);
         mBackButton.setOnClickListener(listener);
         mStartTime = SystemClock.elapsedRealtime();
 
@@ -265,7 +257,7 @@ public class TrainingActivity extends Activity {
     private String logData(byte[] data){
         StringBuilder logTemp = new StringBuilder("");
         int length = data.length;
-        int temp = 0;
+        int temp;
         String string;
         for(int i = 0; i< length; i++){
             temp = data[i] & 0xFF;
@@ -279,7 +271,6 @@ public class TrainingActivity extends Activity {
         return logTemp.toString();
     }
     private void readCharacteristic(String addr, BluetoothGattCharacteristic characteristic, long notifyDealy, long readDealy){
-        final String address = addr;
         final BluetoothGattCharacteristic readCharacteristic = characteristic;
         mHandler.postDelayed(new Runnable() {
             @Override

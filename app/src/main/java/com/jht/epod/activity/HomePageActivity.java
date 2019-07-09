@@ -1,16 +1,10 @@
-package com.jht.epod;
+package com.jht.epod.activity;
 
-import android.app.Activity;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.provider.ContactsContract;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTabHost;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,12 +15,19 @@ import android.widget.TabHost;
 import android.widget.TextView;
 
 
+import com.jht.epod.ClassViewFragment;
+import com.jht.epod.DynamicFragment;
+import com.jht.epod.MainPageFragment;
+import com.jht.epod.MyPlanFragment;
+import com.jht.epod.R;
+import com.jht.epod.UserCenterFragment;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 public class HomePageActivity extends AppCompatActivity implements MainPageFragment.OnFragmentInteractionListener,
         DynamicFragment.OnFragmentInteractionListener,UserCenterFragment.OnFragmentInteractionListener,
-        MyPlanFragment.OnFragmentInteractionListener,ClassViewFragment.OnFragmentInteractionListener{
+        MyPlanFragment.OnFragmentInteractionListener,ClassViewFragment.OnFragmentInteractionListener {
 
     private final static String Tag = "HomePageActivity";
 

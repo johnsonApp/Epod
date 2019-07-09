@@ -66,4 +66,7 @@
     <string name="core">收腹</string>
     <string name="arm">雕塑手臂</string>
     <string name="hip">翹臀</string>
+    <string name="junior">初階</string>
+    <string name="medium">中階</string>
+    <string name="senior">高階</string>
 </resources>

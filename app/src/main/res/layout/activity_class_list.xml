@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorSecondBg"
-    tools:context="com.jht.epod.ClassListActivity">
+    tools:context="com.jht.epod.activity.ClassListActivity">
 
     <LinearLayout
         android:id="@+id/title_layout"
@@ -20,9 +20,12 @@
         <ImageButton
             android:id="@+id/back"
             android:layout_width="30dp"
-            android:layout_height="20dp"
+            android:layout_height="30dp"
             android:layout_marginStart="16dp"
-            android:background="@drawable/class_detail_back" />
+            android:tint="@color/colorBigFont"
+            android:scaleType="centerInside"
+            android:src="@drawable/class_detail_back"
+            android:background="@color/colorWhite"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -138,7 +141,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="6dp"
                     android:layout_marginStart="16dp"
-                    android:text="初级"
+                    android:text="@string/junior"
                     android:textColor="@color/colorWhite"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -157,7 +160,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="6dp"
                     android:layout_marginStart="16dp"
-                    android:text="中级"
+                    android:text="@string/medium"
                     android:textColor="@color/colorWhite"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -176,7 +179,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="6dp"
                     android:layout_marginStart="16dp"
-                    android:text="中级"
+                    android:text="@string/senior"
                     android:textColor="@color/colorWhite"
                     android:textSize="16sp"
                     android:textStyle="bold" />

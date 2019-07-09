@@ -1,4 +1,4 @@
-package com.jht.epod;
+package com.jht.epod.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,6 +8,8 @@ import android.os.Message;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.jht.epod.R;
 
 import java.lang.ref.WeakReference;
 import java.util.Timer;

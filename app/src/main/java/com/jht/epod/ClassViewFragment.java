@@ -8,7 +8,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+
+import com.jht.epod.activity.MainActivity;
 
 public class ClassViewFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match

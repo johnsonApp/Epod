@@ -1,11 +1,10 @@
-package com.jht.epod;
+package com.jht.epod.activity;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCharacteristic;
-import android.bluetooth.BluetoothGattDescriptor;
 import android.bluetooth.BluetoothGattService;
 import android.bluetooth.BluetoothProfile;
 import android.content.BroadcastReceiver;
@@ -23,9 +22,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jht.epod.R;
 import com.jht.epod.ble.BLECommand;
 import com.jht.epod.ble.BleService;
 import com.jht.epod.ble.Constants;
@@ -49,9 +48,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public static final int SERVICE_BIND = 1;
     public static final int CONNECT_CHANGE = 2;
-    public static final int MSG_REQUEST_ACCESSORY_MODE = 3;
-    public static final int UPDATE_CONNECT_STATUS = 4;
-    public static final int UPDATE_SELECTED_NUM = 5;
+    public static final int UPDATE_CONNECT_STATUS = 3;
+    public static final int UPDATE_SELECTED_NUM = 4;
 
     private boolean mIsBind;
     private List<Map<String, Object>> mDeviceList;
@@ -149,10 +147,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 case CONNECT_CHANGE:
                     //deviceAdapter.notifyDataSetChanged();
                     Log.i(TAG, "handleMessage: " + mBleService.getConnectDevices().toString());
-                    break;
-                case MSG_REQUEST_ACCESSORY_MODE:
-                    boolean result = getAccessoryMode();
-                    Log.i(TAG,"MSG_REQUEST_ACCESSORY_MODE result " + result);
                     break;
                 case UPDATE_CONNECT_STATUS:
                     break;
@@ -488,21 +482,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mDeviceList.add(device);
     }
 
-    private boolean setAccessoryMode(int mode) {
-        if(null != mBleService){
-            byte[] data = BLECommand.setParameter(BLECommand.SET_PARAMETER_ACCESSORY_MODE,mode);
-            Log.d(TAG,"setAccessoryMode ");
-            logData(data);
-            return mBleService.writeCharacteristic(Utils.ACCESSORY_BASE_UUID,
-                    Utils.ACCESSORY_WRITE_UUID, data);
-        }
-        return false;
-    }
-
     private void logData(byte[] data){
         StringBuilder logTemp = new StringBuilder("");
         int length = data.length;
-        int temp = 0;
+        int temp;
         String string;
         for(int i = 0; i< length; i++){
             temp = data[i] & 0xFF;
@@ -539,16 +522,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private boolean getAccessoryMode() {
-        if(null != mBleService){
-            byte[] data = BLECommand.getParameter(BLECommand.GET_PARAMETER_ACCESSORY_MODE);
-            Log.d(TAG,"getAccessoryMode ");
-            logData(data);
-            return mBleService.writeCharacteristic(Utils.ACCESSORY_BASE_UUID,
-                    Utils.ACCESSORY_WRITE_UUID, data);
-        }
-        return false;
-    }
 
     private void startClass(){
         if(null == mBleService) {

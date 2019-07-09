@@ -8,8 +8,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.SimpleAdapter;
+
+import com.jht.epod.activity.ClassListActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -74,7 +75,7 @@ public class MyPlanFragment extends Fragment {
         ArrayList<HashMap<String, Object>> listClassValue = new ArrayList<HashMap<String, Object>>();
         for(int i = 0; i < 4; i++){
             HashMap<String, Object> classValue = new HashMap<String, Object>();
-            classValue.put("classPic", R.drawable.list_class_pic);
+            classValue.put("classPic", R.drawable.class_arm_small);
             classValue.put("classTitle", getResources().getString(R.string.list_class_title));
             classValue.put("classSubtitle", getResources().getString(R.string.list_class_subtitle));
             listClassValue.add(classValue);

@@ -61,7 +61,7 @@
 
     <string name="class_detail">Class Detail</string>
     <string name="class_detail_time">time</string>
-    <string name="class_detail_min">minite</string>
+    <string name="class_detail_min">minute</string>
 
     <string name="tab_class">class</string>
     <string name="tab_dynamic">dynamic</string>
@@ -77,4 +77,9 @@
     <string name="core">core</string>
     <string name="arm">arm</string>
     <string name="hip">hip</string>
+    <string name="minute">minutes</string>
+    <string name="calorie">kilocalorie</string>
+    <string name="junior">junior</string>
+    <string name="medium">medium</string>
+    <string name="senior">senior</string>
 </resources>

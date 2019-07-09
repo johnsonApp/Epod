@@ -113,7 +113,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="6dp"
                     android:layout_marginLeft="16dp"
-                    android:text="初级"
+                    android:text="@string/junior"
                     android:textColor="@color/colorWhite"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -132,7 +132,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="6dp"
                     android:layout_marginLeft="16dp"
-                    android:text="中级"
+                    android:text="@string/medium"
                     android:textColor="@color/colorWhite"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -151,7 +151,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="6dp"
                     android:layout_marginLeft="16dp"
-                    android:text="中级"
+                    android:text="@string/senior"
                     android:textColor="@color/colorWhite"
                     android:textSize="16sp"
                     android:textStyle="bold" />

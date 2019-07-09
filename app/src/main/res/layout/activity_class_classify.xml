@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorSecondBg"
-    tools:context="com.jht.epod.ClassClassifyActivity">
+    tools:context="com.jht.epod.activity.ClassClassifyActivity">
 
     <LinearLayout
         android:id="@+id/title_layout"
@@ -20,9 +20,12 @@
         <ImageButton
             android:id="@+id/back"
             android:layout_width="30dp"
-            android:layout_height="20dp"
+            android:layout_height="30dp"
             android:layout_marginStart="16dp"
-            android:background="@drawable/class_detail_back" />
+            android:tint="@color/colorBigFont"
+            android:scaleType="centerInside"
+            android:src="@drawable/class_detail_back"
+            android:background="@color/colorWhite"/>
 
         <TextView
             android:layout_width="wrap_content"

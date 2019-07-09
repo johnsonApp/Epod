@@ -8,31 +8,32 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
+        android:name="EpodApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HomePageActivity">
+        <activity android:name=".activity.HomePageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".activity.MainActivity" />
         <activity
-            android:name=".CountdownActivity"
+            android:name=".activity.CountdownActivity"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".TrainingActivity"
+            android:name=".activity.TrainingActivity"
             android:screenOrientation="landscape" />
 
         <service android:name=".ble.BleService" />
 
-        <activity android:name=".ClassListActivity" />
-        <activity android:name=".ClassClassifyActivity"></activity>
+        <activity android:name=".activity.ClassListActivity" />
+        <activity android:name=".activity.ClassClassifyActivity"></activity>
     </application>
 
 </manifest>
