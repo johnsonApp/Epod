@@ -1,4 +1,4 @@
-package com.jht.epod;
+package com.jht.epod.fragment;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,14 +8,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.SimpleAdapter;
 
-import com.jht.epod.activity.ClassListActivity;
+import com.jht.epod.R;
+import com.jht.epod.activity.MainActivity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
-public class MyPlanFragment extends Fragment {
+public class ClassViewFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -25,9 +22,9 @@ public class MyPlanFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private MyPlanFragment.OnFragmentInteractionListener mListener;
+    private ClassViewFragment.OnFragmentInteractionListener mListener;
 
-    public MyPlanFragment() {
+    public ClassViewFragment() {
         // Required empty public constructor
     }
 
@@ -40,8 +37,8 @@ public class MyPlanFragment extends Fragment {
      * @return A new instance of fragment Fragment1.
      */
     // TODO: Rename and change types and number of parameters
-    public static MyPlanFragment newInstance(String param1, String param2) {
-        MyPlanFragment fragment = new MyPlanFragment();
+    public static ClassViewFragment newInstance(String param1, String param2) {
+        ClassViewFragment fragment = new ClassViewFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -62,30 +59,14 @@ public class MyPlanFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         /* Inflate the layout for this fragment */
-        View view = inflater.inflate(R.layout.fragment_myplan, container, false);
+        View view = inflater.inflate(R.layout.fragment_classview, container, false);
 
-        view.findViewById(R.id.add_course_btn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), ClassListActivity.class));
-            }
-        });
-
-        MeasureListView mListClass = view.findViewById(R.id.list_class);
-        ArrayList<HashMap<String, Object>> listClassValue = new ArrayList<HashMap<String, Object>>();
-        for(int i = 0; i < 4; i++){
-            HashMap<String, Object> classValue = new HashMap<String, Object>();
-            classValue.put("classPic", R.drawable.class_arm_small);
-            classValue.put("classTitle", getResources().getString(R.string.list_class_title));
-            classValue.put("classSubtitle", getResources().getString(R.string.list_class_subtitle));
-            listClassValue.add(classValue);
-        }
-        SimpleAdapter adapter = new SimpleAdapter(getActivity(), listClassValue,
-                R.layout.list_recommended_course,
-                new String[]{"classPic", "classTitle", "classSubtitle"},
-                new int[]{R.id.class_pic, R.id.class_title, R.id.class_subtitle});
-        mListClass.setAdapter(adapter);
-
+        view.findViewById(R.id.class_core).setOnClickListener(mViewListener);
+        view.findViewById(R.id.class_arm).setOnClickListener(mViewListener);
+        view.findViewById(R.id.class_hip).setOnClickListener(mViewListener);
+        view.findViewById(R.id.class_junior).setOnClickListener(mViewListener);
+        view.findViewById(R.id.class_medium).setOnClickListener(mViewListener);
+        view.findViewById(R.id.class_senior).setOnClickListener(mViewListener);
         return view;
     }
 
@@ -99,8 +80,8 @@ public class MyPlanFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof UserCenterFragment.OnFragmentInteractionListener) {
-            mListener = (MyPlanFragment.OnFragmentInteractionListener) context;
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -132,4 +113,22 @@ public class MyPlanFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+    View.OnClickListener mViewListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.class_core:
+                case R.id.class_arm:
+                case R.id.class_hip:
+                case R.id.class_junior:
+                case R.id.class_medium:
+                case R.id.class_senior:
+                    onButtonPressed(null);
+                    break;
+
+            }
+        }
+    };
+
 }

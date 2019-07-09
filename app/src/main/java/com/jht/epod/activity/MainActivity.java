@@ -22,13 +22,18 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jht.epod.R;
 import com.jht.epod.ble.BLECommand;
 import com.jht.epod.ble.BleService;
 import com.jht.epod.ble.Constants;
+import com.jht.epod.model.ClassData;
+import com.jht.epod.model.ClassDataManager;
 import com.jht.epod.utils.Utils;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -62,7 +67,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private BluetoothGattCharacteristic mAccessorySensorCharacteristic;
 
     private LinearLayout mStartClassButton;
+    private LinearLayout mAddClassButton;
     private AlertDialog mAlertDialog;
+
+    private ClassDataManager mManager;
+    private ClassData mData;
 
     protected BroadcastReceiver mBleReceiver = new BroadcastReceiver() {
         @Override
@@ -159,10 +168,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+
+        Bundle extras = getIntent().getExtras();
+        int id = 1;
+        if(extras != null) {
+            id = extras.getInt(Utils.ID);
+        }
+        initData(id);
+        initView();
+
         mDeviceList = new ArrayList<Map<String, Object>>();
         mStartClassButton = findViewById(R.id.start_class_button);
         mStartClassButton.setOnClickListener(this);
+        mAddClassButton = findViewById(R.id.add_class_button);
+        mAddClassButton.setOnClickListener(this);
     }
 
 
@@ -182,6 +203,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.back:
                 finish();
+                break;
+            case R.id.add_class_button:
+                addClassToPlan(Utils.SELECTE);
                 break;
         }
     }
@@ -410,6 +434,47 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         mAlertDialog.show();
     }
+
+    private void initData(int id) {
+        mManager = ClassDataManager.getInstance(this.getApplicationContext());
+        mData = mManager.queryClassById(id);
+    }
+
+    private void initView(){
+        TextView tx = findViewById(R.id.class_name);
+        if(null != mData) {
+            tx.setText(mData.getName());
+            tx = findViewById(R.id.class_time);
+            tx.setText(mData.getTime() + "");
+            tx = findViewById(R.id.class_calorie);
+            tx.setText(mData.getCalorie() + "");
+            tx = findViewById(R.id.class_degree);
+            tx.setText(getDegreeText(mData.getDegree()));
+        }
+
+    }
+
+    private void addClassToPlan(int selected){
+        mManager.updateSelected(mData,selected);
+        finish();
+    }
+
+    private String getDegreeText(int degree){
+        String text = null;
+        switch (degree){
+            case Utils.DEGREE_JUNIOR:
+                text = "初";
+                break;
+            case Utils.DEGREE_MEDIUM:
+                text = "中";
+                break;
+            case Utils.DEGREE_SENIOR:
+                text = "高";
+                break;
+        }
+        return text;
+    }
+
     public void setConnect(){
         int size = mDeviceList.size();
         if(size == 0) {

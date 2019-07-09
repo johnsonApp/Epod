@@ -1,4 +1,4 @@
-package com.jht.epod;
+package com.jht.epod.fragment;
 
 import android.content.Context;
 import android.net.Uri;
@@ -9,16 +9,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.jht.epod.R;
+
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link UserCenterFragment.OnFragmentInteractionListener} interface
+ * {@link DynamicFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link UserCenterFragment#newInstance} factory method to
+ * Use the {@link DynamicFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class UserCenterFragment extends Fragment {
+public class DynamicFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -34,7 +36,7 @@ public class UserCenterFragment extends Fragment {
 
     private boolean mIsConnect;
 
-    public UserCenterFragment() {
+    public DynamicFragment() {
         // Required empty public constructor
     }
 
@@ -47,8 +49,8 @@ public class UserCenterFragment extends Fragment {
      * @return A new instance of fragment Fragment1.
      */
     // TODO: Rename and change types and number of parameters
-    public static UserCenterFragment newInstance(String param1, String param2) {
-        UserCenterFragment fragment = new UserCenterFragment();
+    public static DynamicFragment newInstance(String param1, String param2) {
+        DynamicFragment fragment = new DynamicFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

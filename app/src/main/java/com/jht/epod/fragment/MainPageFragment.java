@@ -1,4 +1,4 @@
-package com.jht.epod;
+package com.jht.epod.fragment;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.jht.epod.R;
 import com.jht.epod.activity.MainActivity;
 
 
@@ -180,10 +181,6 @@ public class MainPageFragment extends Fragment{
 
     public void onFragmentInteraction(Uri uri){
 
-    }
-
-    private void startClassActivity() {
-        startActivity(new Intent(getActivity(),MainActivity.class));
     }
 
     private void init() {

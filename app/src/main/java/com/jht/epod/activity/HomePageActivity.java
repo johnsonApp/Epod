@@ -1,5 +1,6 @@
 package com.jht.epod.activity;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,12 +16,12 @@ import android.widget.TabHost;
 import android.widget.TextView;
 
 
-import com.jht.epod.ClassViewFragment;
-import com.jht.epod.DynamicFragment;
-import com.jht.epod.MainPageFragment;
-import com.jht.epod.MyPlanFragment;
+import com.jht.epod.fragment.ClassViewFragment;
+import com.jht.epod.fragment.DynamicFragment;
+import com.jht.epod.fragment.MainPageFragment;
+import com.jht.epod.fragment.MyPlanFragment;
 import com.jht.epod.R;
-import com.jht.epod.UserCenterFragment;
+import com.jht.epod.fragment.UserCenterFragment;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -99,7 +100,11 @@ public class HomePageActivity extends AppCompatActivity implements MainPageFragm
     }
 
     public void onFragmentInteraction(Uri uri){
+        startClassActivity();
+    }
 
+    private void startClassActivity() {
+        startActivity(new Intent(this,MainActivity.class));
     }
 
     private class TabContent{

@@ -1,29 +1,42 @@
-package com.jht.epod;
+package com.jht.epod.fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-import com.jht.epod.activity.MainActivity;
+import com.jht.epod.R;
 
-public class ClassViewFragment extends Fragment {
+
+/**
+ * A simple {@link Fragment} subclass.
+ * Activities that contain this fragment must implement the
+ * {@link UserCenterFragment.OnFragmentInteractionListener} interface
+ * to handle interaction events.
+ * Use the {@link UserCenterFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class UserCenterFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    private TextView mTextView;
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
-    private ClassViewFragment.OnFragmentInteractionListener mListener;
+    private OnFragmentInteractionListener mListener;
 
-    public ClassViewFragment() {
+    private boolean mIsConnect;
+
+    public UserCenterFragment() {
         // Required empty public constructor
     }
 
@@ -36,8 +49,8 @@ public class ClassViewFragment extends Fragment {
      * @return A new instance of fragment Fragment1.
      */
     // TODO: Rename and change types and number of parameters
-    public static ClassViewFragment newInstance(String param1, String param2) {
-        ClassViewFragment fragment = new ClassViewFragment();
+    public static UserCenterFragment newInstance(String param1, String param2) {
+        UserCenterFragment fragment = new UserCenterFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -58,14 +71,7 @@ public class ClassViewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         /* Inflate the layout for this fragment */
-        View view = inflater.inflate(R.layout.fragment_classview, container, false);
-
-        view.findViewById(R.id.class_core).setOnClickListener(mViewListener);
-        view.findViewById(R.id.class_arm).setOnClickListener(mViewListener);
-        view.findViewById(R.id.class_hip).setOnClickListener(mViewListener);
-        view.findViewById(R.id.class_junior).setOnClickListener(mViewListener);
-        view.findViewById(R.id.class_medium).setOnClickListener(mViewListener);
-        view.findViewById(R.id.class_senior).setOnClickListener(mViewListener);
+        View view = inflater.inflate(R.layout.fragment_dymnamic, container, false);
         return view;
     }
 
@@ -79,8 +85,8 @@ public class ClassViewFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof UserCenterFragment.OnFragmentInteractionListener) {
-            mListener = (ClassViewFragment.OnFragmentInteractionListener) context;
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -113,25 +119,7 @@ public class ClassViewFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    View.OnClickListener mViewListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()){
-                case R.id.class_core:
-                case R.id.class_arm:
-                case R.id.class_hip:
-                case R.id.class_junior:
-                case R.id.class_medium:
-                case R.id.class_senior:
-                    startClassActivity();
-                    break;
-
-            }
-        }
-    };
-
-    private void startClassActivity() {
-        startActivity(new Intent(getActivity(),MainActivity.class));
+    public void setIsConnect(boolean isConnect) {
+        mIsConnect = isConnect;
     }
-
 }

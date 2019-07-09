@@ -94,19 +94,21 @@ public class ClassDatabase {
     public void initDatabase(){
         String[] name = new String[] {"收腹训练" , "肩部与手臂训练", "翘臀训练"};
         int[] type = new int[] {Utils.TYPE_CORE, Utils.TYPE_ARM, Utils.TYPE_HIP};
+        int[] time = new int[] {10, 24, 38};
+        int[] calorie = new int[] {35, 89, 110};
         String[] iconName = new String[] {"class_core_small", "class_arm_small", "class_hip_small"};
         int[] degree = new int[] {Utils.DEGREE_JUNIOR, Utils.DEGREE_MEDIUM, Utils.DEGREE_SENIOR};
         ClassData date = new ClassData();
         int length = 3;
         for(int i = 0; i < length; i ++) {
             date.setName(name[i]);
-            date.setTime(10);
-            date.setCalorie(80);
             date.setClassType(type[i]);
             date.setIconName(iconName[i]);
             date.setSelected(0);
             for(int j = 0; j < length; j++){
                 date.setDegree(degree[j]);
+                date.setTime(time[j]);
+                date.setCalorie(calorie[j]);
                 insertDate(date);
                 Log.i(TAG,"initDatabase insert date " + date.toString());
             }

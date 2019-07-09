@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.jht.epod.db.ClassDatabase;
 import com.jht.epod.db.ClassDatabase;
+import com.jht.epod.model.ClassDataManager;
 
 public class EpodApplication extends Application {
 
@@ -15,5 +16,6 @@ public class EpodApplication extends Application {
         if(!database.isAnyDateInTable()) {
             database.initDatabase();
         }
+        ClassDataManager manager = ClassDataManager.getInstance(this);
     }
 }

@@ -32,9 +32,9 @@ public class ClassDataManager {
 
     public static ArrayList<ClassData> queryClassByType (int classType) {
         ArrayList<ClassData> list = new ArrayList<>();
-        for(ClassData ClassData : DATA) {
-            if(classType == ClassData.getClassType()){
-                list.add(ClassData);
+        for(ClassData classData : DATA) {
+            if(classType == classData.getClassType()){
+                list.add(classData);
             }
         }
         return list;
@@ -42,22 +42,38 @@ public class ClassDataManager {
 
     public static ArrayList<ClassData> queryClassByDegree (int degree) {
         ArrayList<ClassData> list = new ArrayList<>();
-        for(ClassData ClassData : DATA) {
-            if(degree == ClassData.getDegree()){
-                list.add(ClassData);
+        for(ClassData classData : DATA) {
+            if(degree == classData.getDegree()){
+                list.add(classData);
             }
         }
         return list;
     }
 
+    public ClassData queryClassById(int id) {
+        ClassData data = null;
+        for(ClassData classData : DATA) {
+            if(id == classData.getId()){
+                data = classData;
+                break;
+            }
+        }
+        return data;
+    }
+
     public static ArrayList<ClassData> queryClassSelected(int selected) {
         ArrayList<ClassData> list = new ArrayList<>();
-        for(ClassData ClassData : DATA) {
-            if(selected == ClassData.getSelected()){
-                list.add(ClassData);
+        for(ClassData classData : DATA) {
+            if(selected == classData.getSelected()){
+                list.add(classData);
             }
         }
         return list;
+    }
+
+    public long updateSelected(ClassData data, int selected) {
+        updateData(new String[]{data.getId() + ""},selected);
+        return mClassDatabase.updateSelected(data);
     }
 
     public long updateSelected(String[] ids, int selected) {

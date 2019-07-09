@@ -107,17 +107,21 @@ public class ClassClassifyActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TextView stordId = view.findViewById(R.id.store_id);
                 Log.i(TAG,"onItemClick get store id " + stordId.getText());
-                String[] ids = new String[]{stordId.getText().toString()};
-                mDataManager.updateSelected(ids, Utils.SELECTE);
-                finish();
+                int classId = Integer.parseInt(stordId.getText().toString());
+                startClassActivity(classId);
             }
         });
 
         upDataState();
     }
 
+    private void startClassActivity(int id) {
+        Intent intent = new Intent(this,MainActivity.class);
+        intent.putExtra(Utils.ID,id);
+        startActivity(intent);
+    }
+
     private void initClassData() {
-        mDataManager = ClassDataManager.getInstance(this);
         if(mClassType) {
             mFirstData = ClassDataManager.queryClassByType(Utils.TYPE_CORE);
             mSecondData = ClassDataManager.queryClassByType(Utils.TYPE_ARM);
