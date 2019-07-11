@@ -110,7 +110,7 @@ public class MainPageFragment extends Fragment{
     View.OnClickListener mViewListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Log.i(TAG,"mClass clidked");
+            Log.i(TAG,"mClass clicked");
             switch (v.getId()){
                 case R.id.uptab_class:
                     if(mClassSelected){

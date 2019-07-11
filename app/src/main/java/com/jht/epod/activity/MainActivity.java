@@ -205,7 +205,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 finish();
                 break;
             case R.id.add_class_button:
-                addClassToPlan(Utils.SELECTE);
+                addClassToPlan(Utils.SELECT);
                 break;
         }
     }
@@ -457,7 +457,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void addClassToPlan(int selected){
         mData.setSelected(selected);
         mManager.updateSelected(mData);
-        finish();
+        mAddClassButton.setVisibility(View.GONE);
+        Toast.makeText(this, getResources().getString(R.string.toast_tip), Toast.LENGTH_SHORT).show();
     }
 
     private String getDegreeText(int degree){
@@ -490,7 +491,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(0 == size){
             dismissDialog();
             Log.i(TAG,"connectDevice make Toast");
-            Toast.makeText(this,"Can not find any device ,please retry",Toast.LENGTH_LONG);
+            Toast.makeText(this,"Can not find any device ,please retry",Toast.LENGTH_LONG).show();
             return;
         }
         mBleService.disconnect();

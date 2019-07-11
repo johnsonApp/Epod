@@ -60,13 +60,15 @@
     <string name="add_plan_button">+ 添加課程</string>
     <string name="recommended_course">推薦課程</string>
     <string name="list_class_title">肩部和手臂鍛煉</string>
-    <string name="list_class_subtitle">10 分鐘 * 89 千卡 * 初階</string>
     <string name="all_browse">全部瀏覽</string>
     <string name="browse_way">瀏覽方式</string>
     <string name="core">收腹</string>
     <string name="arm">雕塑手臂</string>
     <string name="hip">翹臀</string>
+    <string name="minute">分鐘</string>
+    <string name="calorie">千卡</string>
     <string name="junior">初階</string>
     <string name="medium">中階</string>
     <string name="senior">高階</string>
+    <string name="toast_tip">已添加至我的計劃</string>
 </resources>

@@ -17,6 +17,7 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/my_plan_layout1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -24,7 +25,8 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:padding="16dp"
-                android:background="@color/colorWhite">
+                android:background="@color/colorWhite"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -35,7 +37,7 @@
                     android:text="@string/add_plan_title" />
 
                 <Button
-                    android:id="@+id/add_course_btn"
+                    android:id="@+id/add_course_btn1"
                     android:clickable="true"
                     android:focusable="true"
                     android:layout_width="match_parent"
@@ -46,6 +48,61 @@
                     android:textColor="@color/colorWhite"
                     android:text="@string/add_plan_button"
                     android:background="@drawable/add_plan_btn_big"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/my_plan_layout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@color/colorWhite"
+                android:visibility="visible">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorBlack"
+                        android:text="@string/add_plan_title" />
+
+                    <Button
+                        android:id="@+id/add_course_btn2"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:layout_width="120dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:gravity="center"
+                        android:textSize="16sp"
+                        android:textColor="@color/colorWhite"
+                        android:text="@string/add_plan_button"
+                        android:background="@drawable/add_plan_btn_small"/>
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorSecondBg"/>
+
+                <com.jht.epod.MeasureListView
+                    android:id="@+id/my_class_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </com.jht.epod.MeasureListView>
 
             </LinearLayout>
 

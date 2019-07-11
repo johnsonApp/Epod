@@ -1,8 +1,6 @@
 package com.jht.epod.activity;
 
 import android.app.Activity;
-import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,17 +19,12 @@ import com.jht.epod.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class ClassClassifyActivity extends Activity {
     private static final String TAG = "ClassClassifyActivity";
 
-    private static final int FIRST = 1;
-    private static final int SECOND = 2;
-    private static final int THIRD = 3;
-
-    private int mCurrentSelect = FIRST;//1:收腹,2:雕塑手臂,3:翹臀
-    private int mPreviousSelect = FIRST;//1:收腹,2:雕塑手臂,3:翹臀
+    private int mCurrentSelect = Utils.TYPE_CORE;//4:收腹,5:雕塑手臂,6:翹臀,7:初級,8:中級,9:高級
+    private int mPreviousSelect = 0;//4:收腹,5:雕塑手臂,6:翹臀,7:初級,8:中級,9:高級
 
     private LinearLayout mCoreTab;
     private TextView mCoreText;
@@ -45,20 +38,35 @@ public class ClassClassifyActivity extends Activity {
     private TextView mHipText;
     private ImageView mHipImage;
 
+    private LinearLayout mJuniorTab;
+    private TextView mJuniorText;
+    private ImageView mJuniorImage;
+
+    private LinearLayout mMediumTab;
+    private TextView mMediumText;
+    private ImageView mMediumImage;
+
+    private LinearLayout mSeniorTab;
+    private TextView mSeniorText;
+    private ImageView mSeniorImage;
+
     private MeasureListView mListClass;
 
-    private ClassDataManager mDataManager;
+    private ArrayList<ClassData> mCoreData;
+    private ArrayList<ClassData> mArmData;
+    private ArrayList<ClassData> mHipData;
+    private ArrayList<ClassData> mJuniorData;
+    private ArrayList<ClassData> mMediumData;
+    private ArrayList<ClassData> mSeniorData;
 
-    private ArrayList<ClassData> mFirstData;
-    private ArrayList<ClassData> mSecondData;
-    private ArrayList<ClassData> mThirdData;
+    private SimpleAdapter mCoreAdapter;
+    private SimpleAdapter mArmAdapter;
+    private SimpleAdapter mHipAdapter;
+    private SimpleAdapter mJuniorAdapter;
+    private SimpleAdapter mMediumAdapter;
+    private SimpleAdapter mSeniorAdapter;
 
-    private SimpleAdapter mFirstAdapter;
-    private SimpleAdapter mSecondAdapter;
-    private SimpleAdapter mThirdAdapter;
-
-    private boolean mClassType = true;
-    private int mLastViewSelected = FIRST;
+    private int mClassType = Utils.CLASS_TYPE_BODY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,18 +74,23 @@ public class ClassClassifyActivity extends Activity {
 
         Bundle extras = getIntent().getExtras();
         if(extras != null) {
-            mClassType = extras.getBoolean(Utils.CLASSTYPE, true);
-            mLastViewSelected = extras.getInt(Utils.DEGREE, FIRST);
+            mClassType = extras.getInt(Utils.CLASSTYPE, Utils.CLASS_TYPE_BODY);
+            if (mClassType == Utils.CLASS_TYPE_LEVEL) {
+                mCurrentSelect = extras.getInt(Utils.DEGREE, Utils.DEGREE_JUNIOR);
+            } else {
+                mCurrentSelect = extras.getInt(Utils.DEGREE, Utils.TYPE_CORE);
+            }
         }
 
-        mCurrentSelect = mLastViewSelected;
         initClassData();
         initView();
-
     }
 
     private void initView() {
         setContentView(R.layout.activity_class_classify);
+
+        findViewById(R.id.back).setOnClickListener(mViewListener);
+
         mCoreTab = findViewById(R.id.core_tab);
         mCoreText = findViewById(R.id.core_tab_txt);
         mCoreImage = findViewById(R.id.core_tab_pic);
@@ -90,24 +103,59 @@ public class ClassClassifyActivity extends Activity {
         mHipText = findViewById(R.id.hip_tab_txt);
         mHipImage = findViewById(R.id.hip_tab_pic);
 
-        if(!mClassType) {
-            mCoreText.setText(R.string.junior);
-            mArmText.setText(R.string.medium);
-            mHipText.setText(R.string.senior);
-        }
+        mJuniorTab = findViewById(R.id.junior_tab);
+        mJuniorText = findViewById(R.id.junior_tab_txt);
+        mJuniorImage = findViewById(R.id.junior_tab_pic);
 
-        findViewById(R.id.back).setOnClickListener(mViewListener);
+        mMediumTab = findViewById(R.id.medium_tab);
+        mMediumText = findViewById(R.id.medium_tab_txt);
+        mMediumImage = findViewById(R.id.medium_tab_pic);
+
+        mSeniorTab = findViewById(R.id.senior_tab);
+        mSeniorText = findViewById(R.id.senior_tab_txt);
+        mSeniorImage = findViewById(R.id.senior_tab_pic);
+
         mCoreTab.setOnClickListener(mViewListener);
         mArmTab.setOnClickListener(mViewListener);
         mHipTab.setOnClickListener(mViewListener);
+        mJuniorTab.setOnClickListener(mViewListener);
+        mMediumTab.setOnClickListener(mViewListener);
+        mSeniorTab.setOnClickListener(mViewListener);
+
+        switch (mClassType) {
+            case Utils.CLASS_TYPE_BODY:
+                mCoreTab.setVisibility(View.VISIBLE);
+                mArmTab.setVisibility(View.VISIBLE);
+                mHipTab.setVisibility(View.VISIBLE);
+                mJuniorTab.setVisibility(View.GONE);
+                mMediumTab.setVisibility(View.GONE);
+                mSeniorTab.setVisibility(View.GONE);
+                break;
+            case Utils.CLASS_TYPE_LEVEL:
+                mCoreTab.setVisibility(View.GONE);
+                mArmTab.setVisibility(View.GONE);
+                mHipTab.setVisibility(View.GONE);
+                mJuniorTab.setVisibility(View.VISIBLE);
+                mMediumTab.setVisibility(View.VISIBLE);
+                mSeniorTab.setVisibility(View.VISIBLE);
+                break;
+            case Utils.CLASS_TYPE_ALL:
+                mCoreTab.setVisibility(View.VISIBLE);
+                mArmTab.setVisibility(View.VISIBLE);
+                mHipTab.setVisibility(View.VISIBLE);
+                mJuniorTab.setVisibility(View.VISIBLE);
+                mMediumTab.setVisibility(View.VISIBLE);
+                mSeniorTab.setVisibility(View.VISIBLE);
+                break;
+        }
 
         mListClass = findViewById(R.id.list_class);
         mListClass.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView stordId = view.findViewById(R.id.store_id);
-                Log.i(TAG,"onItemClick get store id " + stordId.getText());
-                int classId = Integer.parseInt(stordId.getText().toString());
+                TextView storeId = view.findViewById(R.id.store_id);
+                Log.i(TAG,"onItemClick get store id " + storeId.getText());
+                int classId = Integer.parseInt(storeId.getText().toString());
                 startClassActivity(classId);
             }
         });
@@ -119,17 +167,29 @@ public class ClassClassifyActivity extends Activity {
         Intent intent = new Intent(this,MainActivity.class);
         intent.putExtra(Utils.ID,id);
         startActivity(intent);
+        finish();
     }
 
     private void initClassData() {
-        if(mClassType) {
-            mFirstData = ClassDataManager.queryClassByType(Utils.TYPE_CORE);
-            mSecondData = ClassDataManager.queryClassByType(Utils.TYPE_ARM);
-            mThirdData = ClassDataManager.queryClassByType(Utils.TYPE_HIP);
-        }else {
-            mFirstData = ClassDataManager.queryClassByDegree(Utils.DEGREE_JUNIOR);
-            mSecondData = ClassDataManager.queryClassByDegree(Utils.DEGREE_MEDIUM);
-            mThirdData = ClassDataManager.queryClassByDegree(Utils.DEGREE_SENIOR);
+        switch (mClassType) {
+            case Utils.CLASS_TYPE_BODY:
+                mCoreData = ClassDataManager.queryClassByType(Utils.TYPE_CORE);
+                mArmData = ClassDataManager.queryClassByType(Utils.TYPE_ARM);
+                mHipData = ClassDataManager.queryClassByType(Utils.TYPE_HIP);
+                break;
+            case Utils.CLASS_TYPE_LEVEL:
+                mJuniorData = ClassDataManager.queryClassByDegree(Utils.DEGREE_JUNIOR);
+                mMediumData = ClassDataManager.queryClassByDegree(Utils.DEGREE_MEDIUM);
+                mSeniorData = ClassDataManager.queryClassByDegree(Utils.DEGREE_SENIOR);
+                break;
+            case Utils.CLASS_TYPE_ALL:
+                mCoreData = ClassDataManager.queryClassByType(Utils.TYPE_CORE);
+                mArmData = ClassDataManager.queryClassByType(Utils.TYPE_ARM);
+                mHipData = ClassDataManager.queryClassByType(Utils.TYPE_HIP);
+                mJuniorData = ClassDataManager.queryClassByDegree(Utils.DEGREE_JUNIOR);
+                mMediumData = ClassDataManager.queryClassByDegree(Utils.DEGREE_MEDIUM);
+                mSeniorData = ClassDataManager.queryClassByDegree(Utils.DEGREE_SENIOR);
+                break;
         }
     }
 
@@ -141,70 +201,90 @@ public class ClassClassifyActivity extends Activity {
         SimpleAdapter adapter = null;
         switch (mCurrentSelect) {
             case Utils.TYPE_CORE:
-                if(null == mFirstAdapter) {
-                    mFirstAdapter = initAdapter();
+                if(null == mCoreAdapter) {
+                    mCoreAdapter = initAdapter();
                 }
-                adapter = mFirstAdapter;
+                adapter = mCoreAdapter;
                 break;
             case Utils.TYPE_ARM:
-                if(null == mSecondAdapter) {
-                    mSecondAdapter = initAdapter();
+                if(null == mArmAdapter) {
+                    mArmAdapter = initAdapter();
                 }
-                adapter = mSecondAdapter;
+                adapter = mArmAdapter;
                 break;
             case Utils.TYPE_HIP:
-                if(null == mThirdAdapter) {
-                    mThirdAdapter = initAdapter();
+                if(null == mHipAdapter) {
+                    mHipAdapter = initAdapter();
                 }
-                adapter = mThirdAdapter;
+                adapter = mHipAdapter;
+                break;
+            case Utils.DEGREE_JUNIOR:
+                if(null == mJuniorAdapter) {
+                    mJuniorAdapter = initAdapter();
+                }
+                adapter = mJuniorAdapter;
+                break;
+            case Utils.DEGREE_MEDIUM:
+                if(null == mMediumAdapter) {
+                    mMediumAdapter = initAdapter();
+                }
+                adapter = mMediumAdapter;
+                break;
+            case Utils.DEGREE_SENIOR:
+                if(null == mSeniorAdapter) {
+                    mSeniorAdapter = initAdapter();
+                }
+                adapter = mSeniorAdapter;
                 break;
         }
         return adapter;
     }
 
     private SimpleAdapter initAdapter() {
-        ArrayList<HashMap<String, Object>> listClassValue = new ArrayList<HashMap<String, Object>>();
+        ArrayList<HashMap<String, Object>> listClassValue = new ArrayList<>();
         ArrayList<ClassData> list = getDataBySelected();
-        for(ClassData Data : list) {
-            HashMap<String, Object> classValue = new HashMap<String, Object>();
-            classValue.put("classPic", getImageResource(Data.getIconName()));
-            classValue.put("classTitle", Data.getName());
-            classValue.put("classSubtitle", getTextInfo(Data));
-            classValue.put("storeId", Data.getId());
+        for(ClassData data : list) {
+            HashMap<String, Object> classValue = new HashMap<>();
+            classValue.put("classPic", getImageResource(data.getIconName()));
+            classValue.put("classTitle", data.getName());
+            classValue.put("classSubtitle1", data.getTime() + getResources().getString(R.string.minutes));
+            classValue.put("classSubtitle2", data.getCalorie() + getResources().getString(R.string.calorie));
+            classValue.put("classSubtitle3", getStringByDegree(data.getDegree()));
+            classValue.put("storeId", data.getId());
             listClassValue.add(classValue);
-            Log.i(TAG,"initAdapter " + Data.toString());
+            Log.i(TAG,"initAdapter " + data.toString());
         }
-        SimpleAdapter adapter = new SimpleAdapter(this, listClassValue,
+        return new SimpleAdapter(this, listClassValue,
                 R.layout.list_recommended_course,
-                new String[]{"classPic", "classTitle", "classSubtitle", "storeId"},
-                new int[]{R.id.class_pic, R.id.class_title, R.id.class_subtitle, R.id.store_id});
-        return adapter;
+                new String[]{"classPic", "classTitle", "classSubtitle1",
+                        "classSubtitle2", "classSubtitle3", "storeId"},
+                new int[]{R.id.class_pic, R.id.class_title, R.id.class_subtitle1,
+                        R.id.class_subtitle2, R.id.class_subtitle3, R.id.store_id});
     }
 
     private ArrayList<ClassData> getDataBySelected(){
         ArrayList<ClassData> list = null;
         switch (mCurrentSelect) {
             case Utils.TYPE_CORE:
-                list = mFirstData;
+                list = mCoreData;
                 break;
             case Utils.TYPE_ARM:
-                list = mSecondData;
+                list = mArmData;
                 break;
             case Utils.TYPE_HIP:
-                list = mThirdData;
+                list = mHipData;
+                break;
+            case Utils.DEGREE_JUNIOR:
+                list = mJuniorData;
+                break;
+            case Utils.DEGREE_MEDIUM:
+                list = mMediumData;
+                break;
+            case Utils.DEGREE_SENIOR:
+                list = mSeniorData;
                 break;
         }
         return list;
-    }
-
-    private String getTextInfo(ClassData data){
-        StringBuilder sb = new StringBuilder();
-        sb.append(data.getTime())
-                .append("分钟*")
-                .append(data.getCalorie())
-                .append("千卡*")
-                .append(getStringByDegree(data.getDegree()));
-        return sb.toString();
     }
 
     private String getStringByDegree(int degree) {
@@ -224,8 +304,7 @@ public class ClassClassifyActivity extends Activity {
     }
 
     private int getImageResource(String imageName) {
-        int resId = getResources().getIdentifier(imageName,"drawable",this.getPackageName());
-        return resId;
+        return getResources().getIdentifier(imageName,"drawable",this.getPackageName());
     }
 
     View.OnClickListener mViewListener = new View.OnClickListener() {
@@ -237,7 +316,7 @@ public class ClassClassifyActivity extends Activity {
                     break;
                 case R.id.core_tab:
                     mPreviousSelect = mCurrentSelect;
-                    mCurrentSelect = FIRST;
+                    mCurrentSelect = Utils.TYPE_CORE;
                     if(mCurrentSelect == mPreviousSelect){
                         return;
                     }
@@ -245,7 +324,7 @@ public class ClassClassifyActivity extends Activity {
                     break;
                 case R.id.arm_tab:
                     mPreviousSelect = mCurrentSelect;
-                    mCurrentSelect = SECOND;
+                    mCurrentSelect = Utils.TYPE_ARM;
                     if(mCurrentSelect == mPreviousSelect){
                         return;
                     }
@@ -253,7 +332,31 @@ public class ClassClassifyActivity extends Activity {
                     break;
                 case R.id.hip_tab:
                     mPreviousSelect = mCurrentSelect;
-                    mCurrentSelect = THIRD;
+                    mCurrentSelect = Utils.TYPE_HIP;
+                    if(mCurrentSelect == mPreviousSelect){
+                        return;
+                    }
+                    upDataState();
+                    break;
+                case R.id.junior_tab:
+                    mPreviousSelect = mCurrentSelect;
+                    mCurrentSelect = Utils.DEGREE_JUNIOR;
+                    if(mCurrentSelect == mPreviousSelect){
+                        return;
+                    }
+                    upDataState();
+                    break;
+                case R.id.medium_tab:
+                    mPreviousSelect = mCurrentSelect;
+                    mCurrentSelect = Utils.DEGREE_MEDIUM;
+                    if(mCurrentSelect == mPreviousSelect){
+                        return;
+                    }
+                    upDataState();
+                    break;
+                case R.id.senior_tab:
+                    mPreviousSelect = mCurrentSelect;
+                    mCurrentSelect = Utils.DEGREE_SENIOR;
                     if(mCurrentSelect == mPreviousSelect){
                         return;
                     }
@@ -264,46 +367,72 @@ public class ClassClassifyActivity extends Activity {
     };
 
     private void upDataState(){
-        //切换三种卡片功能实现
+        //切换卡片功能实现
         upDataListData();
-        //切花三种卡片UI实现
+        //切换卡片UI实现
         upDataTab();
     }
 
     private void upDataTab(){
         switch (mCurrentSelect) {
-            case FIRST:
+            case Utils.TYPE_CORE:
                 mCoreText.setTextColor(getResources().getColor(R.color.colorUpTabSelect));
                 mCoreImage.setBackgroundColor(getResources().getColor(R.color.colorUpTabSelect));
-                if (mPreviousSelect == SECOND) {
-                    mArmText.setTextColor(getResources().getColor(R.color.colorTabUnselect));
-                    mArmImage.setBackgroundColor(getResources().getColor(R.color.colorWhite));
-                } else if (mPreviousSelect == THIRD) {
-                    mHipText.setTextColor(getResources().getColor(R.color.colorTabUnselect));
-                    mHipImage.setBackgroundColor(getResources().getColor(R.color.colorWhite));
-                }
+                unSelectedTabUIChange();
                 break;
-            case SECOND:
+            case Utils.TYPE_ARM:
                 mArmText.setTextColor(getResources().getColor(R.color.colorUpTabSelect));
                 mArmImage.setBackgroundColor(getResources().getColor(R.color.colorUpTabSelect));
-                if (mPreviousSelect == FIRST) {
-                    mCoreText.setTextColor(getResources().getColor(R.color.colorTabUnselect));
-                    mCoreImage.setBackgroundColor(getResources().getColor(R.color.colorWhite));
-                } else if (mPreviousSelect == THIRD) {
-                    mHipText.setTextColor(getResources().getColor(R.color.colorTabUnselect));
-                    mHipImage.setBackgroundColor(getResources().getColor(R.color.colorWhite));
-                }
+                unSelectedTabUIChange();
                 break;
-            case THIRD:
+            case Utils.TYPE_HIP:
                 mHipText.setTextColor(getResources().getColor(R.color.colorUpTabSelect));
                 mHipImage.setBackgroundColor(getResources().getColor(R.color.colorUpTabSelect));
-                if (mPreviousSelect == FIRST) {
-                    mCoreText.setTextColor(getResources().getColor(R.color.colorTabUnselect));
-                    mCoreImage.setBackgroundColor(getResources().getColor(R.color.colorWhite));
-                } else if (mPreviousSelect == SECOND) {
-                    mArmText.setTextColor(getResources().getColor(R.color.colorTabUnselect));
-                    mArmImage.setBackgroundColor(getResources().getColor(R.color.colorWhite));
-                }
+                unSelectedTabUIChange();
+                break;
+            case Utils.DEGREE_JUNIOR:
+                mJuniorText.setTextColor(getResources().getColor(R.color.colorUpTabSelect));
+                mJuniorImage.setBackgroundColor(getResources().getColor(R.color.colorUpTabSelect));
+                unSelectedTabUIChange();
+                break;
+            case Utils.DEGREE_MEDIUM:
+                mMediumText.setTextColor(getResources().getColor(R.color.colorUpTabSelect));
+                mMediumImage.setBackgroundColor(getResources().getColor(R.color.colorUpTabSelect));
+                unSelectedTabUIChange();
+                break;
+            case Utils.DEGREE_SENIOR:
+                mSeniorText.setTextColor(getResources().getColor(R.color.colorUpTabSelect));
+                mSeniorImage.setBackgroundColor(getResources().getColor(R.color.colorUpTabSelect));
+                unSelectedTabUIChange();
+                break;
+        }
+    }
+
+    private void unSelectedTabUIChange () {
+        switch (mPreviousSelect) {
+            case Utils.TYPE_CORE:
+                mCoreText.setTextColor(getResources().getColor(R.color.colorTabUnselect));
+                mCoreImage.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+                break;
+            case Utils.TYPE_ARM:
+                mArmText.setTextColor(getResources().getColor(R.color.colorTabUnselect));
+                mArmImage.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+                break;
+            case Utils.TYPE_HIP:
+                mHipText.setTextColor(getResources().getColor(R.color.colorTabUnselect));
+                mHipImage.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+                break;
+            case Utils.DEGREE_JUNIOR:
+                mJuniorText.setTextColor(getResources().getColor(R.color.colorTabUnselect));
+                mJuniorImage.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+                break;
+            case Utils.DEGREE_MEDIUM:
+                mMediumText.setTextColor(getResources().getColor(R.color.colorTabUnselect));
+                mMediumImage.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+                break;
+            case Utils.DEGREE_SENIOR:
+                mSeniorText.setTextColor(getResources().getColor(R.color.colorTabUnselect));
+                mSeniorImage.setBackgroundColor(getResources().getColor(R.color.colorWhite));
                 break;
         }
     }

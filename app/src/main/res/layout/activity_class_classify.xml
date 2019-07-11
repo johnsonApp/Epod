@@ -123,13 +123,106 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:duplicateParentState="true"
-                android:textSize="16sp"
-                android:textStyle="bold"
+                android:text="@string/hip"
                 android:textColor="@color/uptabtext_color"
-                android:text="@string/hip"/>
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/hip_tab_pic"
+                android:layout_width="40dp"
+                android:layout_height="3dp"
+                android:duplicateParentState="true"
+                android:background="@drawable/uptab_image"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/junior_tab"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_horizontal|bottom"
+            android:clickable="true"
+            android:focusable="true"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/junior_tab_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:duplicateParentState="true"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/uptabtext_color"
+                android:text="@string/junior"/>
+
+            <ImageView
+                android:id="@+id/junior_tab_pic"
+                android:layout_width="40dp"
+                android:layout_height="3dp"
+                android:duplicateParentState="true"
+                android:background="@drawable/uptab_image"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/medium_tab"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_horizontal|bottom"
+            android:clickable="true"
+            android:focusable="true"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/medium_tab_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:duplicateParentState="true"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/uptabtext_color"
+                android:text="@string/medium"/>
+
+            <ImageView
+                android:id="@+id/medium_tab_pic"
+                android:layout_width="40dp"
+                android:layout_height="3dp"
+                android:duplicateParentState="true"
+                android:background="@drawable/uptab_image"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/senior_tab"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_horizontal|bottom"
+            android:clickable="true"
+            android:focusable="true"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/senior_tab_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:duplicateParentState="true"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/uptabtext_color"
+                android:text="@string/senior"/>
+
+            <ImageView
+                android:id="@+id/senior_tab_pic"
                 android:layout_width="40dp"
                 android:layout_height="3dp"
                 android:duplicateParentState="true"
