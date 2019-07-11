@@ -9,6 +9,7 @@ public class ClassData {
     private int degree;
     private int classType;
     private String iconName;
+    private int exerciseTime;
     private int selected;
 
     public String toString() {
@@ -20,6 +21,7 @@ public class ClassData {
                 "degree = " + degree + ", " +
                 "classType = " + classType + ", " +
                 "iconName = " + iconName + ", " +
+                "exerciseTime = " + exerciseTime + ", " +
                 "selected = " + selected + ")";
     }
 
@@ -28,7 +30,7 @@ public class ClassData {
     }
 
     public ClassData(long id, String name, int time, int calorie, int degree,
-                     int classType, String iconName, int selected) {
+                     int classType, String iconName,int exerciseTime, int selected) {
         this.id = id;
         this.name = name;
         this.time = time;
@@ -36,6 +38,7 @@ public class ClassData {
         this.degree = degree;
         this.classType = classType;
         this.iconName = iconName;
+        this.exerciseTime = exerciseTime;
         this.selected = selected;
     }
 
@@ -47,6 +50,7 @@ public class ClassData {
         this.degree = classDate.degree;
         this.classType = classDate.classType;
         this.iconName = classDate.iconName;
+        this.exerciseTime = classDate.exerciseTime;
         this.selected = classDate.selected;
     }
 
@@ -85,6 +89,10 @@ public class ClassData {
     public String getIconName() { return iconName; }
 
     public void setIconName(String iconName) { this.iconName = iconName; }
+
+    public int getExerciseTime() { return exerciseTime; }
+
+    public void setExerciseTime(int exerciseTime) { this.exerciseTime = exerciseTime; }
 
     public int getSelected() { return selected; }
 

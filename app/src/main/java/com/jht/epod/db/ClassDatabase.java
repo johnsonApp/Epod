@@ -52,6 +52,7 @@ public class ClassDatabase {
                 temp.setClassType(cursor.getInt(cursor.getColumnIndex(Utils.CLASSTYPE)));
                 temp.setDegree(cursor.getInt(cursor.getColumnIndex(Utils.DEGREE)));
                 temp.setIconName(cursor.getString(cursor.getColumnIndex(Utils.ICONNAME)));
+                temp.setExerciseTime(cursor.getInt(cursor.getColumnIndex(Utils.EXERCISETIME)));
                 temp.setSelected(cursor.getInt(cursor.getColumnIndex(Utils.SELECTED)));
 
                 Log.i(TAG,"getdate loading date " + temp.toString());
@@ -88,6 +89,18 @@ public class ClassDatabase {
         ContentValues values = new ContentValues();
         values.put(Utils.SELECTED, selected);
         return mSQLiteDatabase.update(Utils.TABLE_NAME, values, "ID = ?", ids);
+    }
+
+    public long updateExerciseTime(ClassData date){
+        ContentValues values = new ContentValues();
+        values.put(Utils.EXERCISETIME, date.getExerciseTime());
+        return mSQLiteDatabase.update(Utils.TABLE_NAME, values, "ID = ?", new String[]{date.getId() + ""});
+    }
+
+    public long updateExerciseTime(String id, int time) {
+        ContentValues values = new ContentValues();
+        values.put(Utils.EXERCISETIME, time);
+        return mSQLiteDatabase.update(Utils.TABLE_NAME, values, "ID = ?", new String[]{id});
     }
 
 

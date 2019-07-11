@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jht.epod.R;
+import com.jht.epod.utils.Utils;
 
 import java.lang.ref.WeakReference;
 import java.util.Timer;
@@ -23,6 +24,7 @@ public class CountdownActivity extends Activity {
     private Timer mTimer = new Timer();
     private MyHandler mHandler = new MyHandler(this);
     private Intent mIntent;
+    private long mId = 1;
 
     class MyHandler extends Handler {
         WeakReference<CountdownActivity> mActivity;
@@ -40,8 +42,9 @@ public class CountdownActivity extends Activity {
                     if (activity.mCurValue == 0){
                         CountdownActivity.this.finish();
                         //倒计时结束进入锻炼页面
-                        mIntent.setClass(CountdownActivity.this, TrainingActivity.class);
-                        startActivity(mIntent);
+                        Intent intent = new Intent(CountdownActivity.this, TrainingActivity.class);
+                        intent.putExtra(Utils.ID, mId);
+                        startActivity(intent);
                     }
                 }
             }
@@ -53,9 +56,19 @@ public class CountdownActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_countdown);
         mIntent = getIntent();
-        mBack = (ImageView) findViewById(R.id.back);
+        Bundle extras = mIntent.getExtras();
+        if(null != extras) {
+            String title = extras.getString(Utils.NAME,"");
+            if(!isStringNull(title)){
+                TextView textView = findViewById(R.id.title);
+                textView.setText(title);
+            }
+            mId = extras.getLong(Utils.ID);
+        }
+
+        mBack = findViewById(R.id.back);
         mBack.setOnClickListener(listener);
-        mCountDown = (TextView) findViewById(R.id.count_down);
+        mCountDown = findViewById(R.id.count_down);
         mTimerTask = new TimerTask() {
             @Override
             public void run() {
@@ -73,6 +86,14 @@ public class CountdownActivity extends Activity {
             }
         }
     };
+
+    private boolean isStringNull(String string) {
+        boolean result = false;
+        if(null == string || string.equals("") || string.equals(" ")) {
+            result = true;
+        }
+        return result;
+    }
 
     @Override
     public void finish() {

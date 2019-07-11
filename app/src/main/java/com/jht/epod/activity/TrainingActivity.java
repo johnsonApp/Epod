@@ -9,6 +9,10 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -20,12 +24,17 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jht.epod.R;
 import com.jht.epod.ble.BleService;
+import com.jht.epod.model.ClassData;
+import com.jht.epod.model.ClassDataManager;
+import com.jht.epod.utils.Utils;
+
 import java.text.DecimalFormat;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -37,10 +46,6 @@ public class TrainingActivity extends Activity {
     private final String SELECT_MODE = "select_mode";
 
     private static final int SERVICE_BIND = 1;
-    private static final int UPDATE_HOMEGYM_COUNT = 2;
-    private static final int UPDATE_ACCESSORY_COUNT = 3;
-    private static final int MSG_DUMBBELL = 4;
-    private static final int MSG_ROPE_SKIP = 5;
     private static final int TIME_CHANGE = 6;
     private static final int REST_TIME_CHANGE = 7;
     private static final int MSG_REQUEST_ACCESSORY_MODE = 8;
@@ -51,8 +56,8 @@ public class TrainingActivity extends Activity {
     private TextView mCountDown;
 
     private long mStartTime = 0L;
+    private long mTotalTime = 0L;
     private long mRestTime = 0L;
-    private int mTotalTime = 0;
     private Timer mTimer = new Timer();
     private TimerTask mTimerTask;
 
@@ -61,15 +66,11 @@ public class TrainingActivity extends Activity {
 
     private BleService mBleService;
 
-    private BluetoothGattCharacteristic mAccessoryReadCharacteristic;
-    private BluetoothGattCharacteristic mAccessoryWriteCharacteristic;
-    private BluetoothGattCharacteristic mAccessorySensorCharacteristic;
-
-
     private TextView mTrainingTime;
     private ImageView mBackButton;
 
-    private StringBuilder mLogData;
+    private ClassDataManager mManager;
+    private ClassData mData;
 
     private Handler mHandler = new Handler() {
         @Override
@@ -78,32 +79,13 @@ public class TrainingActivity extends Activity {
                 case SERVICE_BIND:
                     setBleServiceListener();
                     break;
-                case UPDATE_HOMEGYM_COUNT:
-                    break;
-                case UPDATE_ACCESSORY_COUNT:
-
-                    //mRopeSkippingValue.setText(String.valueOf(mRopeSkipExerciseCounter));
-                    break;
-                case MSG_DUMBBELL:
-
-                    break;
-                case MSG_ROPE_SKIP:
-
-                    break;
                 case MSG_REQUEST_ACCESSORY_MODE:
                     break;
                 case TIME_CHANGE:
-                    //mTrainingTime.setText(String.valueOf(msg.obj));
-                    break;
-                case REST_TIME_CHANGE:
-                    mTrainingTime.setText(String.valueOf(msg.obj));
+                    long time = (long)msg.obj;
+                    mTrainingTime.setText(timeReversal(time));
+                    setExerciseTime(time);
                     Log.i(TAG,"REST_TIME_CHANGE " + String.valueOf(msg.obj));
-                    break;
-                case MSG_SWITCH_PAUSE:
-                    switchToPause();
-                    break;
-                case MSG_SWITCH_TRAINING:
-                    switchToTraining();
                     break;
                 case MSG_SWITCH_STOP:
                     finishTraining();
@@ -116,14 +98,30 @@ public class TrainingActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG,"onCreate");
+
+        Bundle extras = getIntent().getExtras();
+        long id = 1;
+        if(extras != null) {
+            id = extras.getLong(Utils.ID);
+        }
+        initData(id);
+
         setContentView(R.layout.activity_training);
+
+        initBackground();
+
         mCountDown = findViewById(R.id.strength_num);
         mTrainingTime = findViewById(R.id.trainingg_time);
         mBackButton = findViewById(R.id.back);
         mBackButton.setOnClickListener(listener);
         mStartTime = SystemClock.elapsedRealtime();
 
-        switchToPause();
+        TextView title = findViewById(R.id.title);
+        if(null != mData) {
+            title.setText(mData.getName());
+        }
+
+        switchToTraining();
     }
 
     View.OnClickListener listener = new View.OnClickListener() {
@@ -131,7 +129,7 @@ public class TrainingActivity extends Activity {
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.back:
-                    finish();
+                    mHandler.sendEmptyMessage(MSG_SWITCH_STOP);
                     break;
             }
         }
@@ -301,6 +299,25 @@ public class TrainingActivity extends Activity {
         finishTraining();
     }
 
+    private void initData(long id) {
+        mManager = ClassDataManager.getInstance(this.getApplicationContext());
+        mData = mManager.queryClassById(id);
+    }
+
+    private void setExerciseTime(long time) {
+        if(null == mData) {
+            return;
+        }
+        int second = (int)(time/1000);
+        mData.setExerciseTime(second);
+    }
+
+    private void initBackground(){
+        LinearLayout layout = findViewById(R.id.window);
+        Bitmap background = decodeSampledBitmapFromResource(getResources(),R.drawable.training_background,3);
+        layout.setBackground(new BitmapDrawable(getResources(), background));
+    }
+
     private void switchToPause(){
         mTimer.cancel();
         mTimer.purge();
@@ -310,7 +327,7 @@ public class TrainingActivity extends Activity {
         mTimerTask = new TimerTask() {
             @Override
             public void run() {
-                mHandler.sendMessage(mHandler.obtainMessage(REST_TIME_CHANGE, timeReversal(SystemClock.elapsedRealtime()- mRestTime)));
+                mHandler.sendMessage(mHandler.obtainMessage(REST_TIME_CHANGE, (SystemClock.elapsedRealtime()- mRestTime)));
             }
         };
         mTimer.schedule(mTimerTask, 1000, 1000);
@@ -321,19 +338,21 @@ public class TrainingActivity extends Activity {
         mTimer.cancel();
         mTimer.purge();
         mStartTime = SystemClock.elapsedRealtime();
-        /*mTimer = new Timer();
+        mTimer = new Timer();
         mTimerTask = new TimerTask() {
             @Override
             public void run() {
-                mHandler.sendMessage(mHandler.obtainMessage(TIME_CHANGE, timeReversal(SystemClock.elapsedRealtime()- mStartTime + mTotalTime)));
+                mHandler.sendMessage(mHandler.obtainMessage(TIME_CHANGE, (SystemClock.elapsedRealtime()- mStartTime)));
             }
         };
-        mTimer.schedule(mTimerTask, 1000, 1000);*/
+        mTimer.schedule(mTimerTask, 1000, 1000);
     }
 
     private void finishTraining(){
         mTimer.cancel();
         mTimer.purge();
+
+        mManager.updateExerciseTime(mData);
         /*FreeTraining freeTraining = new FreeTraining();
         freeTraining.setUserId(1);
         freeTraining.setCurTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(System.currentTimeMillis())));
@@ -363,6 +382,19 @@ public class TrainingActivity extends Activity {
         String mm = new DecimalFormat("00").format(min % 60);
         String ss = new DecimalFormat("00").format(sec);
         return hh + ":" + mm + ":" + ss;
+    }
+
+    public static Bitmap decodeSampledBitmapFromResource(Resources res, int resId,
+                                                         int size) {
+        // First decode with inJustDecodeBounds=true to check dimensions
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeResource(res, resId, options);
+        // Calculate inSampleSize
+        options.inSampleSize = 2;
+        // Decode bitmap with inSampleSize set
+        options.inJustDecodeBounds = false;
+        return BitmapFactory.decodeResource(res, resId, options);
     }
 
     @Override

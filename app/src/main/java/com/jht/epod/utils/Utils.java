@@ -111,6 +111,7 @@ public class Utils {
     public static final String DEGREE = "DEGREE";
     public static final String CLASSTYPE = "CLASSTYPE";
     public static final String ICONNAME = "ICONNAME";
+    public static final String EXERCISETIME = "EXERCISETIME";
     public static final String SELECTED = "SELECTED";
 
     public static final int DEGREE_JUNIOR = 1;

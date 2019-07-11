@@ -50,7 +50,7 @@ public class ClassDataManager {
         return list;
     }
 
-    public ClassData queryClassById(int id) {
+    public ClassData queryClassById(long id) {
         ClassData data = null;
         for(ClassData classData : DATA) {
             if(id == classData.getId()){
@@ -71,8 +71,9 @@ public class ClassDataManager {
         return list;
     }
 
-    public long updateSelected(ClassData data, int selected) {
-        updateData(new String[]{data.getId() + ""},selected);
+
+    public long updateSelected(ClassData data) {
+        updateData(new String[]{data.getId() + ""}, data.getSelected());
         return mClassDatabase.updateSelected(data);
     }
 
@@ -81,15 +82,40 @@ public class ClassDataManager {
         return mClassDatabase.updateSelected(ids, selected);
     }
 
+    public long updateExerciseTime(ClassData data) {
+        updateExerciseTimeData(data.getId(), data.getExerciseTime());
+        return mClassDatabase.updateExerciseTime(data);
+    }
+
+    public long updateExerciseTime(long id, int time) {
+        updateExerciseTimeData(id,time);
+        return mClassDatabase.updateExerciseTime(String.valueOf(id), time);
+    }
+
     private void updateData(String[] ids, int selected) {
+        int sum = 0;
+        int size = ids.length;
         for(ClassData data:DATA) {
             for(String id : ids) {
                 int which = Integer.parseInt(id);
                 if(data.getId() == which) {
                     data.setSelected(selected);
+                    sum ++;
+                    if(sum >= size) {
+                        return;
+                    }
+                    break;
                 }
             }
         }
+    }
 
+    private void updateExerciseTimeData(long id, int time) {
+        for(ClassData data:DATA) {
+            if(data.getId() == id) {
+                data.setExerciseTime(time);
+                break;
+            }
+        }
     }
 }

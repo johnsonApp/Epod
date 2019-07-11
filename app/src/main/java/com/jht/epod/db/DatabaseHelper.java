@@ -15,6 +15,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             "DEGREE integer," +
             "CLASSTYPE integer," +
             "ICONNAME text," +
+            "EXERCISETIME integer," +
             "SELECTED integer" + ")";
 
     public DatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory,

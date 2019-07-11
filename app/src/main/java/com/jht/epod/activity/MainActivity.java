@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         Bundle extras = getIntent().getExtras();
-        int id = 1;
+        long id = 1;
         if(extras != null) {
             id = extras.getInt(Utils.ID);
         }
@@ -435,7 +435,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mAlertDialog.show();
     }
 
-    private void initData(int id) {
+    private void initData(long id) {
         mManager = ClassDataManager.getInstance(this.getApplicationContext());
         mData = mManager.queryClassById(id);
     }
@@ -455,7 +455,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void addClassToPlan(int selected){
-        mManager.updateSelected(mData,selected);
+        mData.setSelected(selected);
+        mManager.updateSelected(mData);
         finish();
     }
 
@@ -589,7 +590,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     private void startClass(){
-        if(null == mBleService) {
+        /*if(null == mBleService) {
             doBindService();
         }else{
             List<BluetoothDevice> list = mBleService.getConnectDevices();
@@ -599,12 +600,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }else {
                 openClassActivity();
             }
-        }
-        //openClassActivity();
+        }*/
+        openClassActivity();
     }
 
     private void openClassActivity() {
-        startActivity(new Intent(this, CountdownActivity.class));
+        Intent intent = new Intent(this, CountdownActivity.class);
+        intent.putExtra(Utils.ID,mData.getId());
+        intent.putExtra(Utils.NAME, mData.getName());
+        startActivity(intent);
         //finish();
     }
 
