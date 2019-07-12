@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -76,7 +77,7 @@ public class ClassClassifyActivity extends Activity {
         if(extras != null) {
             mClassType = extras.getInt(Utils.CLASSTYPE, Utils.CLASS_TYPE_BODY);
             if (mClassType == Utils.CLASS_TYPE_LEVEL) {
-                mCurrentSelect = extras.getInt(Utils.DEGREE, Utils.DEGREE_JUNIOR);
+                mCurrentSelect = extras.getInt(Utils.DEGREE, Utils.DEGREE_JUNIOR + 3);
             } else {
                 mCurrentSelect = extras.getInt(Utils.DEGREE, Utils.TYPE_CORE);
             }
@@ -146,6 +147,12 @@ public class ClassClassifyActivity extends Activity {
                 mJuniorTab.setVisibility(View.VISIBLE);
                 mMediumTab.setVisibility(View.VISIBLE);
                 mSeniorTab.setVisibility(View.VISIBLE);
+                mCoreText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+                mArmText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+                mHipText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+                mJuniorText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+                mMediumText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+                mSeniorText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
                 break;
         }
 
@@ -218,19 +225,19 @@ public class ClassClassifyActivity extends Activity {
                 }
                 adapter = mHipAdapter;
                 break;
-            case Utils.DEGREE_JUNIOR:
+            case Utils.DEGREE_JUNIOR + 3:
                 if(null == mJuniorAdapter) {
                     mJuniorAdapter = initAdapter();
                 }
                 adapter = mJuniorAdapter;
                 break;
-            case Utils.DEGREE_MEDIUM:
+            case Utils.DEGREE_MEDIUM + 3:
                 if(null == mMediumAdapter) {
                     mMediumAdapter = initAdapter();
                 }
                 adapter = mMediumAdapter;
                 break;
-            case Utils.DEGREE_SENIOR:
+            case Utils.DEGREE_SENIOR + 3:
                 if(null == mSeniorAdapter) {
                     mSeniorAdapter = initAdapter();
                 }
@@ -274,13 +281,13 @@ public class ClassClassifyActivity extends Activity {
             case Utils.TYPE_HIP:
                 list = mHipData;
                 break;
-            case Utils.DEGREE_JUNIOR:
+            case Utils.DEGREE_JUNIOR + 3:
                 list = mJuniorData;
                 break;
-            case Utils.DEGREE_MEDIUM:
+            case Utils.DEGREE_MEDIUM + 3:
                 list = mMediumData;
                 break;
-            case Utils.DEGREE_SENIOR:
+            case Utils.DEGREE_SENIOR + 3:
                 list = mSeniorData;
                 break;
         }
@@ -340,7 +347,7 @@ public class ClassClassifyActivity extends Activity {
                     break;
                 case R.id.junior_tab:
                     mPreviousSelect = mCurrentSelect;
-                    mCurrentSelect = Utils.DEGREE_JUNIOR;
+                    mCurrentSelect = Utils.DEGREE_JUNIOR + 3;
                     if(mCurrentSelect == mPreviousSelect){
                         return;
                     }
@@ -348,7 +355,7 @@ public class ClassClassifyActivity extends Activity {
                     break;
                 case R.id.medium_tab:
                     mPreviousSelect = mCurrentSelect;
-                    mCurrentSelect = Utils.DEGREE_MEDIUM;
+                    mCurrentSelect = Utils.DEGREE_MEDIUM + 3;
                     if(mCurrentSelect == mPreviousSelect){
                         return;
                     }
@@ -356,7 +363,7 @@ public class ClassClassifyActivity extends Activity {
                     break;
                 case R.id.senior_tab:
                     mPreviousSelect = mCurrentSelect;
-                    mCurrentSelect = Utils.DEGREE_SENIOR;
+                    mCurrentSelect = Utils.DEGREE_SENIOR + 3;
                     if(mCurrentSelect == mPreviousSelect){
                         return;
                     }
@@ -390,17 +397,17 @@ public class ClassClassifyActivity extends Activity {
                 mHipImage.setBackgroundColor(getResources().getColor(R.color.colorUpTabSelect));
                 unSelectedTabUIChange();
                 break;
-            case Utils.DEGREE_JUNIOR:
+            case Utils.DEGREE_JUNIOR + 3:
                 mJuniorText.setTextColor(getResources().getColor(R.color.colorUpTabSelect));
                 mJuniorImage.setBackgroundColor(getResources().getColor(R.color.colorUpTabSelect));
                 unSelectedTabUIChange();
                 break;
-            case Utils.DEGREE_MEDIUM:
+            case Utils.DEGREE_MEDIUM + 3:
                 mMediumText.setTextColor(getResources().getColor(R.color.colorUpTabSelect));
                 mMediumImage.setBackgroundColor(getResources().getColor(R.color.colorUpTabSelect));
                 unSelectedTabUIChange();
                 break;
-            case Utils.DEGREE_SENIOR:
+            case Utils.DEGREE_SENIOR + 3:
                 mSeniorText.setTextColor(getResources().getColor(R.color.colorUpTabSelect));
                 mSeniorImage.setBackgroundColor(getResources().getColor(R.color.colorUpTabSelect));
                 unSelectedTabUIChange();
@@ -422,15 +429,15 @@ public class ClassClassifyActivity extends Activity {
                 mHipText.setTextColor(getResources().getColor(R.color.colorTabUnselect));
                 mHipImage.setBackgroundColor(getResources().getColor(R.color.colorWhite));
                 break;
-            case Utils.DEGREE_JUNIOR:
+            case Utils.DEGREE_JUNIOR + 3:
                 mJuniorText.setTextColor(getResources().getColor(R.color.colorTabUnselect));
                 mJuniorImage.setBackgroundColor(getResources().getColor(R.color.colorWhite));
                 break;
-            case Utils.DEGREE_MEDIUM:
+            case Utils.DEGREE_MEDIUM + 3:
                 mMediumText.setTextColor(getResources().getColor(R.color.colorTabUnselect));
                 mMediumImage.setBackgroundColor(getResources().getColor(R.color.colorWhite));
                 break;
-            case Utils.DEGREE_SENIOR:
+            case Utils.DEGREE_SENIOR + 3:
                 mSeniorText.setTextColor(getResources().getColor(R.color.colorTabUnselect));
                 mSeniorImage.setBackgroundColor(getResources().getColor(R.color.colorWhite));
                 break;

@@ -118,13 +118,13 @@ public class Utils {
     public static final int CLASS_TYPE_LEVEL = 2;
     public static final int CLASS_TYPE_ALL = 3;
 
-    public static final int TYPE_CORE = 4;
-    public static final int TYPE_ARM = 5;
-    public static final int TYPE_HIP = 6;
+    public static final int TYPE_CORE = 1;
+    public static final int TYPE_ARM = 2;
+    public static final int TYPE_HIP = 3;
 
-    public static final int DEGREE_JUNIOR = 7;
-    public static final int DEGREE_MEDIUM = 8;
-    public static final int DEGREE_SENIOR = 9;
+    public static final int DEGREE_JUNIOR = 1;
+    public static final int DEGREE_MEDIUM = 2;
+    public static final int DEGREE_SENIOR = 3;
 
     public static final int SELECT = 1;
     public static final int UNSELECT = 0;
