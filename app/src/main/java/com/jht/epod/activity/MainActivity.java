@@ -184,6 +184,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mStartClassButton.setOnClickListener(this);
         mAddClassButton = findViewById(R.id.add_class_button);
         mAddClassButton.setOnClickListener(this);
+        if (mData.getSelected() == Utils.SELECT) {
+            mAddClassButton.setVisibility(View.GONE);
+        }
     }
 
 

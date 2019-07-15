@@ -10,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.jht.epod.R;
+import com.jht.epod.activity.ClassClassifyActivity;
 import com.jht.epod.activity.MainActivity;
+import com.jht.epod.utils.Utils;
 
 public class ClassViewFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -117,17 +119,34 @@ public class ClassViewFragment extends Fragment {
     View.OnClickListener mViewListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            Intent intent = new Intent(getActivity(), ClassClassifyActivity.class);
             switch (v.getId()){
                 case R.id.class_core:
-                case R.id.class_arm:
-                case R.id.class_hip:
-                case R.id.class_junior:
-                case R.id.class_medium:
-                case R.id.class_senior:
-                    onButtonPressed(null);
+                    intent.putExtra(Utils.CLASSIFICATION, Utils.CLASS_TYPE_BODY);
+                    intent.putExtra(Utils.CLASSTYPE, Utils.TYPE_CORE);
                     break;
-
+                case R.id.class_arm:
+                    intent.putExtra(Utils.CLASSIFICATION, Utils.CLASS_TYPE_BODY);
+                    intent.putExtra(Utils.CLASSTYPE, Utils.TYPE_ARM);
+                    break;
+                case R.id.class_hip:
+                    intent.putExtra(Utils.CLASSIFICATION, Utils.CLASS_TYPE_BODY);
+                    intent.putExtra(Utils.CLASSTYPE, Utils.TYPE_HIP);
+                    break;
+                case R.id.class_junior:
+                    intent.putExtra(Utils.CLASSIFICATION, Utils.CLASS_TYPE_LEVEL);
+                    intent.putExtra(Utils.DEGREE, Utils.DEGREE_JUNIOR);
+                    break;
+                case R.id.class_medium:
+                    intent.putExtra(Utils.CLASSIFICATION, Utils.CLASS_TYPE_LEVEL);
+                    intent.putExtra(Utils.DEGREE, Utils.DEGREE_MEDIUM);
+                    break;
+                case R.id.class_senior:
+                    intent.putExtra(Utils.CLASSIFICATION, Utils.CLASS_TYPE_LEVEL);
+                    intent.putExtra(Utils.DEGREE, Utils.DEGREE_SENIOR);
+                    break;
             }
+            startActivity(intent);
         }
     };
 

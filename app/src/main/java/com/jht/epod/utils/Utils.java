@@ -114,6 +114,12 @@ public class Utils {
     public static final String EXERCISETIME = "EXERCISETIME";
     public static final String SELECTED = "SELECTED";
 
+    /**
+     * CLASS_TYPE_BODY = 1
+     * CLASS_TYPE_LEVEL = 2
+     * CLASS_TYPE_ALL = 3
+     */
+    public static final String CLASSIFICATION = "CLASSIFICATION";
     public static final int CLASS_TYPE_BODY = 1;
     public static final int CLASS_TYPE_LEVEL = 2;
     public static final int CLASS_TYPE_ALL = 3;

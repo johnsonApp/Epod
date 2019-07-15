@@ -24,8 +24,8 @@ import java.util.HashMap;
 public class ClassClassifyActivity extends Activity {
     private static final String TAG = "ClassClassifyActivity";
 
-    private int mCurrentSelect = Utils.TYPE_CORE;//4:收腹,5:雕塑手臂,6:翹臀,7:初級,8:中級,9:高級
-    private int mPreviousSelect = 0;//4:收腹,5:雕塑手臂,6:翹臀,7:初級,8:中級,9:高級
+    private int mCurrentSelect = Utils.TYPE_CORE;
+    private int mPreviousSelect = 0;
 
     private LinearLayout mCoreTab;
     private TextView mCoreText;
@@ -67,7 +67,7 @@ public class ClassClassifyActivity extends Activity {
     private SimpleAdapter mMediumAdapter;
     private SimpleAdapter mSeniorAdapter;
 
-    private int mClassType = Utils.CLASS_TYPE_BODY;
+    private int mClassification = Utils.CLASS_TYPE_BODY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,11 +75,11 @@ public class ClassClassifyActivity extends Activity {
 
         Bundle extras = getIntent().getExtras();
         if(extras != null) {
-            mClassType = extras.getInt(Utils.CLASSTYPE, Utils.CLASS_TYPE_BODY);
-            if (mClassType == Utils.CLASS_TYPE_LEVEL) {
-                mCurrentSelect = extras.getInt(Utils.DEGREE, Utils.DEGREE_JUNIOR + 3);
+            mClassification = extras.getInt(Utils.CLASSIFICATION, Utils.CLASS_TYPE_BODY);
+            if (mClassification == Utils.CLASS_TYPE_LEVEL) {
+                mCurrentSelect = extras.getInt(Utils.DEGREE, Utils.DEGREE_JUNIOR + 3) + 3;
             } else {
-                mCurrentSelect = extras.getInt(Utils.DEGREE, Utils.TYPE_CORE);
+                mCurrentSelect = extras.getInt(Utils.CLASSTYPE, Utils.TYPE_CORE);
             }
         }
 
@@ -123,7 +123,7 @@ public class ClassClassifyActivity extends Activity {
         mMediumTab.setOnClickListener(mViewListener);
         mSeniorTab.setOnClickListener(mViewListener);
 
-        switch (mClassType) {
+        switch (mClassification) {
             case Utils.CLASS_TYPE_BODY:
                 mCoreTab.setVisibility(View.VISIBLE);
                 mArmTab.setVisibility(View.VISIBLE);
@@ -178,7 +178,7 @@ public class ClassClassifyActivity extends Activity {
     }
 
     private void initClassData() {
-        switch (mClassType) {
+        switch (mClassification) {
             case Utils.CLASS_TYPE_BODY:
                 mCoreData = ClassDataManager.queryClassByType(Utils.TYPE_CORE);
                 mArmData = ClassDataManager.queryClassByType(Utils.TYPE_ARM);

@@ -118,8 +118,7 @@ public class MyPlanFragment extends Fragment {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(getActivity(), ClassClassifyActivity.class);
-            intent.putExtra(Utils.CLASSTYPE, Utils.CLASS_TYPE_ALL);
-            intent.putExtra(Utils.DEGREE, Utils.TYPE_CORE);
+            intent.putExtra(Utils.CLASSIFICATION, Utils.CLASS_TYPE_ALL);
             startActivity(intent);
         }
     };
