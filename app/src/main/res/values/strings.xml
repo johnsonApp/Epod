@@ -82,4 +82,5 @@
     <string name="medium">medium</string>
     <string name="senior">senior</string>
     <string name="toast_tip">Has been added to my plan</string>
+    <string name="delete">delete</string>
 </resources>

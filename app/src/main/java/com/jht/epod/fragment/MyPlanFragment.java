@@ -1,6 +1,8 @@
 package com.jht.epod.fragment;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,6 +23,7 @@ import com.jht.epod.activity.ClassClassifyActivity;
 import com.jht.epod.activity.MainActivity;
 import com.jht.epod.model.ClassData;
 import com.jht.epod.model.ClassDataManager;
+import com.jht.epod.utils.MyAdapter;
 import com.jht.epod.utils.Utils;
 
 import java.util.ArrayList;
@@ -172,7 +175,7 @@ public class MyPlanFragment extends Fragment {
         } else {
             mPlanLayout1.setVisibility(View.GONE);
             mPlanLayout2.setVisibility(View.VISIBLE);
-            ArrayList<HashMap<String, Object>> listClassValue = new ArrayList<>();
+            final ArrayList<HashMap<String, Object>> listClassValue = new ArrayList<>();
             for (ClassData data : mClassDataList) {
                 HashMap<String, Object> classValue = new HashMap<>();
                 classValue.put("classPic", getResources().getIdentifier(data.getIconName(),"drawable", getActivity().getPackageName()));
@@ -184,7 +187,7 @@ public class MyPlanFragment extends Fragment {
                 classValue.put("storeId", data.getId());
                 listClassValue.add(classValue);
             }
-            SimpleAdapter adapter = new SimpleAdapter(getActivity(), listClassValue,
+            final MyAdapter adapter = new MyAdapter(getActivity(), listClassValue,
                     R.layout.list_selected_class,
                     new String[]{"classPic", "classTitle", "classSubtitle1", "classSubtitle2", "classSubtitle3", "completedTime", "storeId"},
                     new int[]{R.id.class_pic, R.id.class_title, R.id.class_subtitle1, R.id.class_subtitle2, R.id.class_subtitle3, R.id.completed_time, R.id.store_id});
@@ -198,6 +201,23 @@ public class MyPlanFragment extends Fragment {
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     intent.putExtra(Utils.ID, classId);
                     startActivity(intent);
+                }
+            });
+            adapter.setOnItemDeleteClickListener(new MyAdapter.onItemDeleteListener() {
+                @Override
+                public void onDeleteClick(final int position) {
+                    new AlertDialog.Builder(getActivity()).setTitle("提示").setMessage("确定删除该课程？")
+                            .setNegativeButton("取消", null)
+                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    ClassData classData = mClassDataList.get(position);
+                                    classData.setSelected(Utils.UNSELECT);
+                                    mManager.updateSelected(classData);
+                                    listClassValue.remove(position);
+                                    adapter.notifyDataSetChanged();
+                                }
+                            }).create().show();
                 }
             });
         }

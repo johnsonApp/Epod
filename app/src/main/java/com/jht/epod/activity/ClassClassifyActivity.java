@@ -77,7 +77,7 @@ public class ClassClassifyActivity extends Activity {
         if(extras != null) {
             mClassification = extras.getInt(Utils.CLASSIFICATION, Utils.CLASS_TYPE_BODY);
             if (mClassification == Utils.CLASS_TYPE_LEVEL) {
-                mCurrentSelect = extras.getInt(Utils.DEGREE, Utils.DEGREE_JUNIOR + 3);
+                mCurrentSelect = extras.getInt(Utils.DEGREE, Utils.DEGREE_JUNIOR + 3) + 3;
             } else {
                 mCurrentSelect = extras.getInt(Utils.CLASSTYPE, Utils.TYPE_CORE);
             }
