@@ -1,24 +1,24 @@
 package com.jht.epod.fragment;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import com.jht.epod.MeasureListView;
 import com.jht.epod.R;
 import com.jht.epod.activity.ClassClassifyActivity;
+import com.jht.epod.activity.MainActivity;
 import com.jht.epod.model.ClassData;
 import com.jht.epod.model.ClassDataManager;
 import com.jht.epod.utils.Utils;
@@ -110,7 +110,6 @@ public class MyPlanFragment extends Fragment {
                 new String[]{"classPic", "classTitle", "classSubtitle1", "classSubtitle2", "classSubtitle3"},
                 new int[]{R.id.class_pic, R.id.class_title, R.id.class_subtitle1, R.id.class_subtitle2, R.id.class_subtitle3});
         mListClass.setAdapter(adapter);
-
         return view;
     }
 
@@ -181,15 +180,54 @@ public class MyPlanFragment extends Fragment {
                 classValue.put("classSubtitle1", data.getTime() + getResources().getString(R.string.minutes));
                 classValue.put("classSubtitle2", data.getCalorie() + getResources().getString(R.string.calorie));
                 classValue.put("classSubtitle3", getStringByDegree(data.getDegree()));
+                classValue.put("completedTime", switchExerciseTime(data.getExerciseTime()));
                 classValue.put("storeId", data.getId());
                 listClassValue.add(classValue);
             }
             SimpleAdapter adapter = new SimpleAdapter(getActivity(), listClassValue,
-                    R.layout.list_recommended_course,
-                    new String[]{"classPic", "classTitle", "classSubtitle1", "classSubtitle2", "classSubtitle3"},
-                    new int[]{R.id.class_pic, R.id.class_title, R.id.class_subtitle1, R.id.class_subtitle2, R.id.class_subtitle3});
+                    R.layout.list_selected_class,
+                    new String[]{"classPic", "classTitle", "classSubtitle1", "classSubtitle2", "classSubtitle3", "completedTime", "storeId"},
+                    new int[]{R.id.class_pic, R.id.class_title, R.id.class_subtitle1, R.id.class_subtitle2, R.id.class_subtitle3, R.id.completed_time, R.id.store_id});
             mMyClassList.setAdapter(adapter);
+            mMyClassList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    TextView storeId = view.findViewById(R.id.store_id);
+                    int classId = Integer.parseInt(storeId.getText().toString());
+                    Log.i(TAG,"onItemClick get store id " + classId);
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    intent.putExtra(Utils.ID, classId);
+                    startActivity(intent);
+                }
+            });
         }
+    }
+
+    private String switchExerciseTime (int time) {
+        StringBuilder exerciseTime = new StringBuilder();
+        if (time == 0) {
+            exerciseTime.append("还未进行过训练");
+        } else {
+            exerciseTime.append("已进行至");
+            int minute = time / 60;
+            int second = time % 60;
+            if (minute == 0) {
+                exerciseTime.append("00");
+            } else if (minute < 10) {
+                exerciseTime.append("0" + minute);
+            } else {
+                exerciseTime.append(minute);
+            }
+            exerciseTime.append(":");
+            if (second == 0) {
+                exerciseTime.append("00");
+            } else if (second < 10) {
+                exerciseTime.append("0" + second);
+            } else {
+                exerciseTime.append(second);
+            }
+        }
+        return exerciseTime.toString();
     }
 
     @Override

@@ -24,8 +24,8 @@ import java.util.HashMap;
 public class ClassClassifyActivity extends Activity {
     private static final String TAG = "ClassClassifyActivity";
 
-    private int mCurrentSelect = Utils.TYPE_CORE;
-    private int mPreviousSelect = 0;
+    private int mCurrentSelect = Utils.TYPE_CORE;//4:收腹,5:雕塑手臂,6:翹臀,7:初級,8:中級,9:高級
+    private int mPreviousSelect = 0;//4:收腹,5:雕塑手臂,6:翹臀,7:初級,8:中級,9:高級
 
     private LinearLayout mCoreTab;
     private TextView mCoreText;
@@ -77,7 +77,7 @@ public class ClassClassifyActivity extends Activity {
         if(extras != null) {
             mClassification = extras.getInt(Utils.CLASSIFICATION, Utils.CLASS_TYPE_BODY);
             if (mClassification == Utils.CLASS_TYPE_LEVEL) {
-                mCurrentSelect = extras.getInt(Utils.DEGREE, Utils.DEGREE_JUNIOR + 3) + 3;
+                mCurrentSelect = extras.getInt(Utils.DEGREE, Utils.DEGREE_JUNIOR + 3);
             } else {
                 mCurrentSelect = extras.getInt(Utils.CLASSTYPE, Utils.TYPE_CORE);
             }

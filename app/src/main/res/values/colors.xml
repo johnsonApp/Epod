@@ -22,4 +22,6 @@
     <color name="colorUpTabSelect">#e22319</color>
     <color name="colorTabUnselect">#9a9a9a</color>
     <color name="colorClassCount">#c7c7c7</color>
+    <color name="colorTrainingCompletedTime">#d2d2d2</color>
+    <color name="colorClassLine">#e0e0e0</color>
 </resources>
