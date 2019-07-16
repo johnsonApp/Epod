@@ -174,7 +174,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Bundle extras = getIntent().getExtras();
         long id = 1;
         if(extras != null) {
-            id = extras.getInt(Utils.ID);
+            id = extras.getLong(Utils.ID);
         }
         initData(id);
         initView();

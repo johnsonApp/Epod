@@ -162,7 +162,7 @@ public class ClassClassifyActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TextView storeId = view.findViewById(R.id.store_id);
                 Log.i(TAG,"onItemClick get store id " + storeId.getText());
-                int classId = Integer.parseInt(storeId.getText().toString());
+                Long classId = Long.parseLong(storeId.getText().toString());
                 startClassActivity(classId);
             }
         });
@@ -170,7 +170,7 @@ public class ClassClassifyActivity extends Activity {
         upDataState();
     }
 
-    private void startClassActivity(int id) {
+    private void startClassActivity(Long id) {
         Intent intent = new Intent(this,MainActivity.class);
         intent.putExtra(Utils.ID,id);
         startActivity(intent);

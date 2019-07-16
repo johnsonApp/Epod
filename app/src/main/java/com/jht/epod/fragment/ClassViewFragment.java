@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 
 import com.jht.epod.R;
 import com.jht.epod.activity.ClassClassifyActivity;
-import com.jht.epod.activity.MainActivity;
 import com.jht.epod.utils.Utils;
 
 public class ClassViewFragment extends Fragment {

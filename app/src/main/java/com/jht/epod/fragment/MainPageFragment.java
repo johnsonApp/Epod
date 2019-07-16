@@ -16,7 +16,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jht.epod.R;
-import com.jht.epod.activity.MainActivity;
 
 
 /**

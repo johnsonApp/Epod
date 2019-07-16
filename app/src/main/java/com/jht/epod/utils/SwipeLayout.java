@@ -4,11 +4,13 @@ import android.content.Context;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.ViewDragHelper;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 
 public class SwipeLayout extends LinearLayout {
+    private String TAG = "SwipeLayout";
     private ViewDragHelper viewDragHelper;
     private View contentView;
     private View actionView;
@@ -88,6 +90,12 @@ public class SwipeLayout extends LinearLayout {
         @Override
         public void onViewReleased(View releasedChild, float xvel, float yvel) {
             super.onViewReleased(releasedChild, xvel, yvel);
+            Log.e(TAG, "xvel = " + xvel + ", yvel = " + yvel);
+            Log.e(TAG, "draggedX = " + draggedX + ", dragDistance = " + dragDistance);
+            if (xvel == 0.0f && yvel == 0.0f && draggedX == 0) {
+                callOnClick();
+                return;
+            }
             boolean settleToOpen = false;
             if (xvel > AUTO_OPEN_SPEED_LIMIT) {
                 settleToOpen = false;

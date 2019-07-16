@@ -20,7 +20,6 @@ import android.widget.TextView;
 import com.jht.epod.MeasureListView;
 import com.jht.epod.R;
 import com.jht.epod.activity.ClassClassifyActivity;
-import com.jht.epod.activity.MainActivity;
 import com.jht.epod.model.ClassData;
 import com.jht.epod.model.ClassDataManager;
 import com.jht.epod.utils.MyAdapter;
@@ -192,18 +191,18 @@ public class MyPlanFragment extends Fragment {
                     new String[]{"classPic", "classTitle", "classSubtitle1", "classSubtitle2", "classSubtitle3", "completedTime", "storeId"},
                     new int[]{R.id.class_pic, R.id.class_title, R.id.class_subtitle1, R.id.class_subtitle2, R.id.class_subtitle3, R.id.completed_time, R.id.store_id});
             mMyClassList.setAdapter(adapter);
-            mMyClassList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    TextView storeId = view.findViewById(R.id.store_id);
-                    int classId = Integer.parseInt(storeId.getText().toString());
-                    Log.i(TAG,"onItemClick get store id " + classId);
-                    Intent intent = new Intent(getActivity(), MainActivity.class);
-                    intent.putExtra(Utils.ID, classId);
-                    startActivity(intent);
-                }
-            });
-            adapter.setOnItemDeleteClickListener(new MyAdapter.onItemDeleteListener() {
+//            mMyClassList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                @Override
+//                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                    TextView storeId = view.findViewById(R.id.store_id);
+//                    Long classId = Long.parseLong(storeId.getText().toString());
+//                    Log.i(TAG,"onItemClick get store id " + classId);
+//                    Intent intent = new Intent(getActivity(), MainActivity.class);
+//                    intent.putExtra(Utils.ID, classId);
+//                    startActivity(intent);
+//                }
+//            });
+            adapter.setOnItemDeleteClickListener(new MyAdapter.OnItemDeleteListener() {
                 @Override
                 public void onDeleteClick(final int position) {
                     new AlertDialog.Builder(getActivity()).setTitle("提示").setMessage("确定删除该课程？")

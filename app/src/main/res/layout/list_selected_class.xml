@@ -5,6 +5,7 @@
     android:layout_height="100dp">
 
     <com.jht.epod.utils.SwipeLayout
+        android:id="@+id/swipe_layout"
         android:layout_width="match_parent"
         android:layout_height="100dp">
 
