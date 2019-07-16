@@ -262,13 +262,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.jht.epod.MeasureListView
+            <com.jht.epod.ui.MeasureListView
                 android:id="@+id/list_class"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:divider="@color/colorSecondBg"
                 android:dividerHeight="8dp">
-            </com.jht.epod.MeasureListView>
+            </com.jht.epod.ui.MeasureListView>
 
         </LinearLayout>
 

@@ -4,9 +4,14 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jht.epod.R;
@@ -34,7 +39,20 @@ public class DynamicFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    private boolean mIsConnect;
+    private LinearLayout mHot;
+    private TextView mHotText;
+    private ImageView mHotImage;
+    private LinearLayout mMoments;
+    private TextView mMomentsText;
+    private ImageView mMomentsImage;
+
+    private Fragment mCurrentFragment = null;
+    private HotViewFragment mHotView;
+    private MomentsViewFragement mMomentsView;
+
+    private boolean mHotViewSelected = true;
+
+    private View mView;
 
     public DynamicFragment() {
         // Required empty public constructor
@@ -65,15 +83,47 @@ public class DynamicFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        mHotView = new HotViewFragment();
+        mMomentsView = new MomentsViewFragement();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         /* Inflate the layout for this fragment */
-        View view = inflater.inflate(R.layout.fragment_dymnamic, container, false);
-        return view;
+        if(mView == null){
+            mView = inflater.inflate(R.layout.fragment_dymnamic, container, false);
+            init();
+        }
+        return mView;
     }
+
+    View.OnClickListener mViewListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.uptab_hot:
+                    if(mHotViewSelected){
+                        return;
+                    }
+                    updateState(true);
+                    break;
+                case R.id.uptab_moments:
+                    if(!mHotViewSelected){
+                        return;
+                    }
+                    updateState(false);
+                    break;
+
+                /*case R.id.class_core:
+                case R.id.class_arm:
+                case R.id.class_hip:
+                case R.id.class_junior:
+                    startClassActivity();
+                    break;*/
+            }
+        }
+    };
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -119,7 +169,62 @@ public class DynamicFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    public void setIsConnect(boolean isConnect) {
-        mIsConnect = isConnect;
+    private void init() {
+        if(mView != null){
+            View view = mView;
+            mHot = view.findViewById(R.id.uptab_hot);
+            mHotText = view.findViewById(R.id.uptab_hot_text);
+            mHotImage = view.findViewById(R.id.uptab_hot_image);
+
+            mMoments = view.findViewById(R.id.uptab_moments);
+            mMomentsText = view.findViewById(R.id.uptab_moments_text);
+            mMomentsImage = view.findViewById(R.id.uptab_moments_image);
+
+            updateState(mHotViewSelected);
+            mHot.setOnClickListener(mViewListener);
+            mMoments.setOnClickListener(mViewListener);
+        }
     }
+
+    private void updateState(boolean state){
+        mHotViewSelected = state;
+        if(mHotViewSelected) {
+            switchFragment(mHotView);
+        }else {
+            switchFragment(mMomentsView);
+        }
+        updateTab();
+    }
+
+    private void updateTab(){
+        if(mHotViewSelected){
+            mHotText.setTextColor(getResources().getColor(R.color.colorUpTabSelect));
+            mHotImage.setBackgroundColor(getResources().getColor(R.color.colorUpTabSelect));
+            mMomentsText.setTextColor(getResources().getColor(R.color.colorTabUnselect));
+            mMomentsImage.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+        }else{
+            mHotText.setTextColor(getResources().getColor(R.color.colorTabUnselect));
+            mHotImage.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+            mMomentsText.setTextColor(getResources().getColor(R.color.colorUpTabSelect));
+            mMomentsImage.setBackgroundColor(getResources().getColor(R.color.colorUpTabSelect));
+        }
+    }
+
+    private void switchFragment(Fragment targetFragment) {
+        FragmentManager manager = getActivity().getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        if(!targetFragment.isAdded()) {
+            if (mCurrentFragment != null) {
+                transaction.hide(mCurrentFragment);
+            }
+            transaction.add(R.id.fragment_container,targetFragment,targetFragment.getClass().getName());
+        }else {
+            transaction
+                    .hide(mCurrentFragment)
+                    .show(targetFragment);
+        }
+        mCurrentFragment = targetFragment;
+        transaction.commit();
+    }
+
 }

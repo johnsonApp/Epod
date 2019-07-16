@@ -98,11 +98,11 @@
                     android:layout_height="1dp"
                     android:background="@color/colorSecondBg"/>
 
-                <com.jht.epod.MeasureListView
+                <com.jht.epod.ui.MeasureListView
                     android:id="@+id/my_class_list"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                </com.jht.epod.MeasureListView>
+                </com.jht.epod.ui.MeasureListView>
 
             </LinearLayout>
 
@@ -125,12 +125,12 @@
                     android:textColor="@color/colorBlack"
                     android:text="@string/recommended_course" />
 
-                <com.jht.epod.MeasureListView
+                <com.jht.epod.ui.MeasureListView
                     android:id="@+id/list_class"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp">
-                </com.jht.epod.MeasureListView>
+                </com.jht.epod.ui.MeasureListView>
 
             </LinearLayout>
 

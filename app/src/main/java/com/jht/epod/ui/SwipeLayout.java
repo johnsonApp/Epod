@@ -1,4 +1,4 @@
-package com.jht.epod.utils;
+package com.jht.epod.ui;
 
 import android.content.Context;
 import android.support.v4.view.ViewCompat;

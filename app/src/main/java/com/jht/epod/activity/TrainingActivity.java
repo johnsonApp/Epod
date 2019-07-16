@@ -386,13 +386,8 @@ public class TrainingActivity extends Activity {
 
     public static Bitmap decodeSampledBitmapFromResource(Resources res, int resId,
                                                          int size) {
-        // First decode with inJustDecodeBounds=true to check dimensions
         final BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        BitmapFactory.decodeResource(res, resId, options);
-        // Calculate inSampleSize
-        options.inSampleSize = 2;
-        // Decode bitmap with inSampleSize set
+        options.inSampleSize = size;
         options.inJustDecodeBounds = false;
         return BitmapFactory.decodeResource(res, resId, options);
     }

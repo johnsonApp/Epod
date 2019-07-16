@@ -83,4 +83,10 @@
     <string name="senior">senior</string>
     <string name="toast_tip">Has been added to my plan</string>
     <string name="delete">delete</string>
+    <string name="add_comment">comment</string>
+    <string name="share">share</string>
+    <string name="suggest_follow">suggest to follow</string>
+    <string name="more">more</string>
+    <string name="follow">follow</string>
+    <string name="followed">followed</string>
 </resources>

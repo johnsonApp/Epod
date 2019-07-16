@@ -24,4 +24,5 @@
     <color name="colorClassCount">#c7c7c7</color>
     <color name="colorTrainingCompletedTime">#d2d2d2</color>
     <color name="colorClassLine">#e0e0e0</color>
+    <color name="colorButtonBg">#3081fd</color>
 </resources>

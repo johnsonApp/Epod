@@ -12,10 +12,10 @@ import android.widget.LinearLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
-import com.jht.epod.MeasureListView;
 import com.jht.epod.R;
 import com.jht.epod.model.ClassData;
 import com.jht.epod.model.ClassDataManager;
+import com.jht.epod.ui.MeasureListView;
 import com.jht.epod.utils.Utils;
 
 import java.util.ArrayList;
@@ -66,6 +66,8 @@ public class ClassClassifyActivity extends Activity {
     private SimpleAdapter mJuniorAdapter;
     private SimpleAdapter mMediumAdapter;
     private SimpleAdapter mSeniorAdapter;
+
+    private ClassDataManager mManager;
 
     private int mClassification = Utils.CLASS_TYPE_BODY;
 
@@ -178,24 +180,25 @@ public class ClassClassifyActivity extends Activity {
     }
 
     private void initClassData() {
+        mManager = ClassDataManager.getInstance(this.getApplicationContext());
         switch (mClassification) {
             case Utils.CLASS_TYPE_BODY:
-                mCoreData = ClassDataManager.queryClassByType(Utils.TYPE_CORE);
-                mArmData = ClassDataManager.queryClassByType(Utils.TYPE_ARM);
-                mHipData = ClassDataManager.queryClassByType(Utils.TYPE_HIP);
+                mCoreData = mManager.queryClassByType(Utils.TYPE_CORE);
+                mArmData = mManager.queryClassByType(Utils.TYPE_ARM);
+                mHipData = mManager.queryClassByType(Utils.TYPE_HIP);
                 break;
             case Utils.CLASS_TYPE_LEVEL:
-                mJuniorData = ClassDataManager.queryClassByDegree(Utils.DEGREE_JUNIOR);
-                mMediumData = ClassDataManager.queryClassByDegree(Utils.DEGREE_MEDIUM);
-                mSeniorData = ClassDataManager.queryClassByDegree(Utils.DEGREE_SENIOR);
+                mJuniorData = mManager.queryClassByDegree(Utils.DEGREE_JUNIOR);
+                mMediumData = mManager.queryClassByDegree(Utils.DEGREE_MEDIUM);
+                mSeniorData = mManager.queryClassByDegree(Utils.DEGREE_SENIOR);
                 break;
             case Utils.CLASS_TYPE_ALL:
-                mCoreData = ClassDataManager.queryClassByType(Utils.TYPE_CORE);
-                mArmData = ClassDataManager.queryClassByType(Utils.TYPE_ARM);
-                mHipData = ClassDataManager.queryClassByType(Utils.TYPE_HIP);
-                mJuniorData = ClassDataManager.queryClassByDegree(Utils.DEGREE_JUNIOR);
-                mMediumData = ClassDataManager.queryClassByDegree(Utils.DEGREE_MEDIUM);
-                mSeniorData = ClassDataManager.queryClassByDegree(Utils.DEGREE_SENIOR);
+                mCoreData = mManager.queryClassByType(Utils.TYPE_CORE);
+                mArmData = mManager.queryClassByType(Utils.TYPE_ARM);
+                mHipData = mManager.queryClassByType(Utils.TYPE_HIP);
+                mJuniorData = mManager.queryClassByDegree(Utils.DEGREE_JUNIOR);
+                mMediumData = mManager.queryClassByDegree(Utils.DEGREE_MEDIUM);
+                mSeniorData = mManager.queryClassByDegree(Utils.DEGREE_SENIOR);
                 break;
         }
     }

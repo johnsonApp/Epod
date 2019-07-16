@@ -1,4 +1,4 @@
-package com.jht.epod;
+package com.jht.epod.ui;
 
 import android.content.Context;
 import android.util.AttributeSet;

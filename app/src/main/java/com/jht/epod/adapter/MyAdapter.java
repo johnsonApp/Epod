@@ -1,4 +1,4 @@
-package com.jht.epod.utils;
+package com.jht.epod.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.jht.epod.R;
 import com.jht.epod.activity.MainActivity;
+import com.jht.epod.ui.SwipeLayout;
+import com.jht.epod.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;

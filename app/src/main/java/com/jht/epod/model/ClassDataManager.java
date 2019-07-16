@@ -30,7 +30,7 @@ public class ClassDataManager {
         return sClassDataManager;
     }
 
-    public static ArrayList<ClassData> queryClassByType (int classType) {
+    public ArrayList<ClassData> queryClassByType (int classType) {
         ArrayList<ClassData> list = new ArrayList<>();
         for(ClassData classData : DATA) {
             if(classType == classData.getClassType()){
@@ -40,7 +40,7 @@ public class ClassDataManager {
         return list;
     }
 
-    public static ArrayList<ClassData> queryClassByDegree (int degree) {
+    public ArrayList<ClassData> queryClassByDegree (int degree) {
         ArrayList<ClassData> list = new ArrayList<>();
         for(ClassData classData : DATA) {
             if(degree == classData.getDegree()){
@@ -61,7 +61,7 @@ public class ClassDataManager {
         return data;
     }
 
-    public static ArrayList<ClassData> queryClassSelected(int selected) {
+    public ArrayList<ClassData> queryClassSelected(int selected) {
         ArrayList<ClassData> list = new ArrayList<>();
         for(ClassData classData : DATA) {
             if(selected == classData.getSelected()){
@@ -70,7 +70,6 @@ public class ClassDataManager {
         }
         return list;
     }
-
 
     public long updateSelected(ClassData data) {
         updateData(new String[]{data.getId() + ""}, data.getSelected());

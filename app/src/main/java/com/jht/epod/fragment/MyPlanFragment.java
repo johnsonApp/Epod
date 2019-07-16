@@ -7,22 +7,19 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
 
-import com.jht.epod.MeasureListView;
 import com.jht.epod.R;
 import com.jht.epod.activity.ClassClassifyActivity;
 import com.jht.epod.model.ClassData;
 import com.jht.epod.model.ClassDataManager;
-import com.jht.epod.utils.MyAdapter;
+import com.jht.epod.ui.MeasureListView;
+import com.jht.epod.adapter.MyAdapter;
 import com.jht.epod.utils.Utils;
 
 import java.util.ArrayList;

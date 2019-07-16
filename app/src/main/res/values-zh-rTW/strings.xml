@@ -72,4 +72,10 @@
     <string name="senior">高階</string>
     <string name="toast_tip">已添加至我的計劃</string>
     <string name="delete">刪除</string>
+    <string name="add_comment">我要評論</string>
+    <string name="share">分享</string>
+    <string name="suggest_follow">推薦關注</string>
+    <string name="more">查看更多</string>
+    <string name="follow">關注TA</string>
+    <string name="followed">已關注</string>
 </resources>
