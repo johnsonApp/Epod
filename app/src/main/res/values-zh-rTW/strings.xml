@@ -81,4 +81,10 @@
     <string name="message">消息</string>
     <string name="system_notification">系统通知</string>
     <string name="friend_message">好友消息</string>
+    <string name="following">關注</string>
+    <string name="follower">粉絲</string>
+    <string name="exercise_day">練習(天)</string>
+    <string name="exercise_min">練習時間(分鐘 )</string>
+    <string name="burn_calories">消耗(kcal)</string>
+    <string name="chat">聊天</string>
 </resources>

@@ -76,6 +76,6 @@ public class MomentsViewFragement extends Fragment {
             newData1.setIsFollowed((int)(Math.random() * 100)%2 == 0);
             datas1.add(i,newData1);
         }
-        mAdapter = new MomentsViewAdapter(datas,datas1);
+        mAdapter = new MomentsViewAdapter(getContext(),datas,datas1);
     }
 }

@@ -62,6 +62,6 @@ public class HotViewFragment extends Fragment {
             itemData.setIsLiked((int)(Math.random() * 100)%2 == 0);
             data.add(i, itemData);
         }
-        mAdapter = new HotGridViewAdapter(data);
+        mAdapter = new HotGridViewAdapter(getContext(),data);
     }
 }

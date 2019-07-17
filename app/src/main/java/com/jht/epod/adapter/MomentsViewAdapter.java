@@ -1,5 +1,7 @@
 package com.jht.epod.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.media.Image;
 import android.provider.ContactsContract;
 import android.util.Log;
@@ -14,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jht.epod.R;
+import com.jht.epod.activity.UserInfoActivity;
 import com.jht.epod.model.MomentsViewItemData;
 import com.jht.epod.model.RecommendItemData;
 
@@ -26,16 +29,30 @@ public class MomentsViewAdapter extends BaseAdapter {
 
     private ArrayList<MomentsViewItemData> mData;
     private ArrayList<RecommendItemData> mData1;
+    private Context mContext;
 
-    public MomentsViewAdapter(ArrayList<MomentsViewItemData> data, ArrayList<RecommendItemData> data1) {
+    private boolean mNeedRecommend = true;
+
+    public MomentsViewAdapter(Context context, ArrayList<MomentsViewItemData> data, ArrayList<RecommendItemData> data1) {
+        mContext = context;
         mData = data;
         mData1 = data1;
     }
 
+    public void setAdapterType(boolean isNeedRecommend) {
+        mNeedRecommend = isNeedRecommend;
+    }
+
     @Override
     public int getCount() {
-        if (mData != null) return mData.size() + 1;
-        else return 0;
+        int count = 0;
+        if (mData != null) {
+            count = mData.size();
+        }
+        if(mNeedRecommend) {
+            count ++;
+        }
+        return count;
     }
 
     @Override
@@ -53,15 +70,23 @@ public class MomentsViewAdapter extends BaseAdapter {
 
     @Override
     public int getViewTypeCount() {
-        return TYPE_COUNT;
+        if(mNeedRecommend) return TYPE_COUNT;
+        else return 1;
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (position == TYPE_COUNT)
-            return TYPE_TWO;
-        else
-            return TYPE_ONE;
+        int type = 0;
+        if(!mNeedRecommend) {
+            type = TYPE_ONE;
+        }else {
+            if (position == TYPE_COUNT) {
+                type = TYPE_TWO;
+            } else {
+                type = TYPE_ONE;
+            }
+        }
+        return type;
     }
 
 
@@ -112,7 +137,7 @@ public class MomentsViewAdapter extends BaseAdapter {
             case TYPE_ONE:
                 MomentsViewItemData data;
                 final int finalPostion;
-                if(position < TYPE_COUNT){
+                if(!mNeedRecommend || position < TYPE_COUNT){
                     finalPostion = position;
                 }else {
                     finalPostion = position - 1;
@@ -130,6 +155,17 @@ public class MomentsViewAdapter extends BaseAdapter {
                 holder1.picture2.setImageResource(pic[1]);
                 holder1.picture3.setImageResource(pic[2]);
                 updateLikeIcon(holder1.likeIcon,data.getIsLiked());
+
+                holder1.userIcon.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(mNeedRecommend) {
+                            mContext.startActivity(new Intent(mContext, UserInfoActivity.class));
+                        }
+                    }
+                });
+
+
                 holder1.like.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v){

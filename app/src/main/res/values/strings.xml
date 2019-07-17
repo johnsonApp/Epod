@@ -92,4 +92,10 @@
     <string name="message">Message</string>
     <string name="system_notification">Notification</string>
     <string name="friend_message">Message</string>
+    <string name="following">following</string>
+    <string name="follower">follower</string>
+    <string name="exercise_day">exercise(day)</string>
+    <string name="exercise_min">exercise(minute)</string>
+    <string name="burn_calories">burn(kcal)</string>
+    <string name="chat">chat</string>
 </resources>

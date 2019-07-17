@@ -1,5 +1,7 @@
 package com.jht.epod.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jht.epod.R;
+import com.jht.epod.activity.UserInfoActivity;
 import com.jht.epod.model.HotViewItemData;
 
 import java.util.ArrayList;
@@ -17,8 +20,10 @@ public class HotGridViewAdapter extends BaseAdapter {
     private static final String TAG = "HotGridViewAdapter";
 
     private ArrayList<HotViewItemData> mData;
+    private Context mContext;
 
-    public HotGridViewAdapter(ArrayList<HotViewItemData> data){
+    public HotGridViewAdapter(Context context,ArrayList<HotViewItemData> data){
+        mContext = context;
         mData = data;
     }
 
@@ -69,6 +74,14 @@ public class HotGridViewAdapter extends BaseAdapter {
             if(isLiked){
                 holder.likeIcon.setImageResource(R.drawable.hot_item_liked);
             }
+
+            holder.userIcon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mContext.startActivity(new Intent(mContext, UserInfoActivity.class));
+                }
+            });
+
             holder.likeIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v){
