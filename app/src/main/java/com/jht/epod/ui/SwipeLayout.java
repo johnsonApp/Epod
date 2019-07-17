@@ -92,7 +92,7 @@ public class SwipeLayout extends LinearLayout {
             super.onViewReleased(releasedChild, xvel, yvel);
             Log.e(TAG, "xvel = " + xvel + ", yvel = " + yvel);
             Log.e(TAG, "draggedX = " + draggedX + ", dragDistance = " + dragDistance);
-            if (xvel == 0.0f && yvel == 0.0f && draggedX == 0) {
+            if (xvel == 0.0f && yvel == 0.0f && draggedX < 10) {
                 callOnClick();
                 return;
             }

@@ -89,4 +89,7 @@
     <string name="more">more</string>
     <string name="follow">follow</string>
     <string name="followed">followed</string>
+    <string name="message">Message</string>
+    <string name="system_notification">Notification</string>
+    <string name="friend_message">Message</string>
 </resources>

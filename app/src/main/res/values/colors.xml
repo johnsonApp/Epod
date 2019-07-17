@@ -25,4 +25,5 @@
     <color name="colorTrainingCompletedTime">#d2d2d2</color>
     <color name="colorClassLine">#e0e0e0</color>
     <color name="colorButtonBg">#3081fd</color>
+    <color name="colorMessageDividerLine">#e1e1e1</color>
 </resources>

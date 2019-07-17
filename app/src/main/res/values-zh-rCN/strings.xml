@@ -78,4 +78,7 @@
     <string name="more">查看更多</string>
     <string name="follow">关注TA</string>
     <string name="followed">已关注</string>
+    <string name="message">消息</string>
+    <string name="system_notification">系统通知</string>
+    <string name="friend_message">好友消息</string>
 </resources>
