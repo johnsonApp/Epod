@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jht.epod.R;
+import com.jht.epod.activity.SuggestedFollowsActivity;
 import com.jht.epod.activity.UserInfoActivity;
 import com.jht.epod.model.MomentsViewItemData;
 import com.jht.epod.model.RecommendItemData;
@@ -188,6 +189,7 @@ public class MomentsViewAdapter extends BaseAdapter {
                     @Override
                     public void onClick(View v) {
                         Log.i(TAG," more click");
+                        mContext.startActivity(new Intent(mContext, SuggestedFollowsActivity.class));
                     }
                 });
                 RecommendViewAdapter adapter = new RecommendViewAdapter(mData1);

@@ -41,6 +41,7 @@
         <activity android:name=".activity.MessageActivity"/>
         <activity android:name=".activity.UserInfoActivity"/>
         <activity android:name=".activity.SendMomentsActivity"/>
+        <activity android:name=".activity.SuggestedFollowsActivity"/>
     </application>
 
 </manifest>
