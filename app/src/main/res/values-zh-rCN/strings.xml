@@ -87,4 +87,11 @@
     <string name="exercise_min">练习时间(分钟)</string>
     <string name="burn_calories">消耗(kcal)</string>
     <string name="chat">聊天</string>
+    <string name="send_moment">发布动态</string>
+    <string name="send">发布</string>
+    <string name="show_everything">晒改变,晒运动,晒心得,晒美食</string>
+    <string name="pick">从相册选择</string>
+    <string name="camera">拍照</string>
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
 </resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="pick_camera">
+        <item>@string/camera</item>
+        <item>@string/pick</item>
+    </string-array>
+</resources>

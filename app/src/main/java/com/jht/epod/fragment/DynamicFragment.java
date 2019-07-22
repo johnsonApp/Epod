@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.jht.epod.R;
 import com.jht.epod.activity.MessageActivity;
+import com.jht.epod.activity.SendMomentsActivity;
 
 
 /**
@@ -48,7 +49,7 @@ public class DynamicFragment extends Fragment {
     private TextView mMomentsText;
     private ImageView mMomentsImage;
 
-    private ImageView mMessageImage;
+    //private ImageView mMessageImage;
 
     private Fragment mCurrentFragment = null;
     private HotViewFragment mHotView;
@@ -121,13 +122,9 @@ public class DynamicFragment extends Fragment {
                 case R.id.message:
                     startActivity(new Intent(getActivity(), MessageActivity.class));
                     break;
-
-                /*case R.id.class_core:
-                case R.id.class_arm:
-                case R.id.class_hip:
-                case R.id.class_junior:
-                    startClassActivity();
-                    break;*/
+                case R.id.camera:
+                    startActivity(new Intent(getActivity(), SendMomentsActivity.class));
+                    break;
             }
         }
     };
@@ -187,13 +184,15 @@ public class DynamicFragment extends Fragment {
             mMomentsText = view.findViewById(R.id.uptab_moments_text);
             mMomentsImage = view.findViewById(R.id.uptab_moments_image);
 
-            mMessageImage = view.findViewById(R.id.message);
+            //mMessageImage = view.findViewById(R.id.message);
 
             updateState(mHotViewSelected);
             mHot.setOnClickListener(mViewListener);
             mMoments.setOnClickListener(mViewListener);
 
-            mMessageImage.setOnClickListener(mViewListener);
+            view.findViewById(R.id.message).setOnClickListener(mViewListener);
+            view.findViewById(R.id.camera).setOnClickListener(mViewListener);
+
         }
     }
 

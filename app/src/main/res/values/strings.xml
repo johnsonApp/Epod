@@ -98,4 +98,11 @@
     <string name="exercise_min">exercise(minute)</string>
     <string name="burn_calories">burn(kcal)</string>
     <string name="chat">chat</string>
+    <string name="send_moment">send moments</string>
+    <string name="send">send</string>
+    <string name="show_everything">show your change, show your exercise, show your experience, show your delicacies </string>
+    <string name="pick">pick from alubm</string>
+    <string name="camera">camera</string>
+    <string name="confirm">confirm</string>
+    <string name="cancel">cancel</string>
 </resources>

@@ -2,14 +2,14 @@ package com.jht.epod.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
-import android.provider.ContactsContract;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -151,9 +151,11 @@ public class MomentsViewAdapter extends BaseAdapter {
                 holder1.likeNum.setText(data.getLikeNum() + "");
                 holder1.commentNum.setText(data.getCommentNum() + "");
                 holder1.textBody.setText(data.getTextBody());
-                holder1.picture1.setImageResource(pic[0]);
-                holder1.picture2.setImageResource(pic[1]);
-                holder1.picture3.setImageResource(pic[2]);
+
+                setImageView(holder1.picture1,pic[0]);
+                setImageView(holder1.picture2,pic[1]);
+                setImageView(holder1.picture3,pic[2]);
+
                 updateLikeIcon(holder1.likeIcon,data.getIsLiked());
 
                 holder1.userIcon.setOnClickListener(new View.OnClickListener() {
@@ -226,6 +228,19 @@ public class MomentsViewAdapter extends BaseAdapter {
         }else {
             view.setImageResource(R.drawable.hot_item_like);
         }
+    }
+
+    private void setImageView(ImageView view, int resId){
+        Bitmap bitmap = decodeSampledBitmapFromResource(mContext.getResources(),resId,3);
+        view.setImageBitmap(bitmap);
+    }
+
+    private static Bitmap decodeSampledBitmapFromResource(Resources res, int resId,
+                                                          int size) {
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inSampleSize = size;
+        options.inJustDecodeBounds = false;
+        return BitmapFactory.decodeResource(res, resId, options);
     }
 
     private class MyViewHolder {

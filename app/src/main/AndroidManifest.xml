@@ -6,6 +6,10 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
 
     <application
         android:name="EpodApplication"
@@ -34,8 +38,9 @@
 
         <activity android:name=".activity.ClassListActivity" />
         <activity android:name=".activity.ClassClassifyActivity" />
-        <activity android:name=".activity.MessageActivity"></activity>
-        <activity android:name=".activity.UserInfoActivity"></activity>
+        <activity android:name=".activity.MessageActivity"/>
+        <activity android:name=".activity.UserInfoActivity"/>
+        <activity android:name=".activity.SendMomentsActivity"/>
     </application>
 
 </manifest>

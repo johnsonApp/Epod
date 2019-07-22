@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        >
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="16dp"
+            android:tint="@color/colorBigFont"
+            android:scaleType="centerInside"
+            android:src="@drawable/class_detail_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/back"
+            android:layout_marginLeft="24dp"
+            android:text="@string/send_moment"
+            android:textSize="18sp"
+            android:textColor="@color/colorBigFont"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:text="@string/send"
+            android:textSize="18sp"
+            android:textColor="@color/colorButtonBg"
+            android:textStyle="bold"
+            android:layout_alignParentRight="true"
+            />
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorMessageDividerLine"/>
+    
+    <EditText
+        android:id="@+id/moment_text"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:textSize="12sp"
+        android:textColor="@color/colorBigFont"
+        android:textColorHint="@color/colorTabUnselect"
+        android:hint="@string/show_everything"
+        android:padding="16dp"
+        android:gravity="left"/>
+
+    <GridView
+        android:id="@+id/moment_select_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="4"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:horizontalSpacing="8dp"
+        android:verticalSpacing="8dp"/>
+
+
+</LinearLayout>
