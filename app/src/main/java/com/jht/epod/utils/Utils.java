@@ -135,6 +135,8 @@ public class Utils {
     public static final int SELECT = 1;
     public static final int UNSELECT = 0;
 
+    public static final int SELECT_IMAGE_MAX_NUM = 9;
+
     /**
      * URI Scheme maps a byte code into the scheme and an optional scheme specific prefix.
      */

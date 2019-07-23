@@ -11,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
 import com.jht.epod.R;
+import com.jht.epod.utils.Utils;
 
 import java.util.ArrayList;
 
@@ -18,7 +19,7 @@ public class SelecteImageAdapter extends BaseAdapter {
 
     private static final String TAG = "SelecteImageAdapter";
 
-    private static final int MAX_NUM = 9;
+
     private static final int TAG_CAMERA = 0;
     private static final int TAG_PHOTO = 1;
 
@@ -31,7 +32,6 @@ public class SelecteImageAdapter extends BaseAdapter {
     public SelecteImageAdapter(Context context, ArrayList<String> path){
         mContext = context;
         setData(path);
-        setLastData();
     }
 
     public void setData(ArrayList<String> path) {
@@ -43,10 +43,6 @@ public class SelecteImageAdapter extends BaseAdapter {
         }
     }
 
-    private void setLastData(){
-        mFilePath.add(R.drawable.camera + "");
-    }
-
     public void setListener(CameraListener listener){
         mListener = listener;
     }
@@ -54,8 +50,10 @@ public class SelecteImageAdapter extends BaseAdapter {
     @Override
     public int getCount() {
         int count = mFilePath.size();
-        if(count > MAX_NUM){
-            count = MAX_NUM;
+        if(count < Utils.SELECT_IMAGE_MAX_NUM){
+            count++;
+        }else if(count > Utils.SELECT_IMAGE_MAX_NUM) {
+            count = Utils.SELECT_IMAGE_MAX_NUM;
         }
         return count;
     }
@@ -81,9 +79,8 @@ public class SelecteImageAdapter extends BaseAdapter {
         }
 
 
-        if(mSize <= MAX_NUM && position == (getCount() - 1)) {
-            int resId = Integer.parseInt(mFilePath.get(position));
-            imageView.setImageResource(resId);
+        if(mSize < Utils.SELECT_IMAGE_MAX_NUM && position == (getCount() - 1)) {
+            imageView.setImageResource(R.drawable.camera);
             imageView.setTag(TAG_CAMERA);
             imageView.setOnClickListener(new View.OnClickListener(){
                 @Override
